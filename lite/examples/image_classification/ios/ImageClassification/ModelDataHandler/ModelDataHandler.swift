@@ -16,6 +16,8 @@ import CoreImage
 import TensorFlowLite
 import UIKit
 import Accelerate
+import TensorFlowLiteTaskVision
+
 
 /// A result from invoking the `Interpreter`.
 struct Result {
@@ -34,7 +36,7 @@ typealias FileInfo = (name: String, extension: String)
 
 /// Information about the MobileNet model.
 enum MobileNet {
-  static let modelInfo: FileInfo = (name: "mobilenet_quant_v1_224", extension: "tflite")
+  static let modelInfo: FileInfo = (name: "mobilenet_v2_1.0_224", extension: "tflite")
   static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
 }
 
@@ -46,7 +48,7 @@ class ModelDataHandler {
   // MARK: - Internal Properties
 
   /// The current thread count used by the TensorFlow Lite Interpreter.
-  let threadCount: Int
+  let threadCount: Int = 1
 
   let resultCount = 3
   let threadCountLimit = 10
@@ -64,7 +66,7 @@ class ModelDataHandler {
   private var labels: [String] = []
 
   /// TensorFlow Lite `Interpreter` object for performing inference on a given model.
-  private var interpreter: Interpreter
+  private var imageClassifier: ImageClassifier
 
   /// Information about the alpha component in RGBA data.
   private let alphaComponent = (baseOffset: 4, moduloRemainder: 3)
@@ -86,95 +88,103 @@ class ModelDataHandler {
     }
 
     // Specify the options for the `Interpreter`.
-    self.threadCount = threadCount
-    var options = InterpreterOptions()
-    options.threadCount = threadCount
+//    self.threadCount = threadCount
+//    var options = InterpreterOptions()
+//    options.threadCount = threadCount
     do {
       // Create the `Interpreter`.
-      interpreter = try Interpreter(modelPath: modelPath, options: options)
-      // Allocate memory for the model's input `Tensor`s.
-      try interpreter.allocateTensors()
+      let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+      
+      let maxResults = 3
+      imageClassifierOptions.classificationOptions.maxResults = maxResults
+      
+      imageClassifier = try ImageClassifier.imageClassifier(options: imageClassifierOptions)
+     
     } catch let error {
       print("Failed to create the interpreter with error: \(error.localizedDescription)")
       return nil
     }
     // Load the classes listed in the labels file.
-    loadLabels(fileInfo: labelsFileInfo)
+//    loadLabels(fileInfo: labelsFileInfo)
   }
 
   // MARK: - Internal Methods
 
   /// Performs image preprocessing, invokes the `Interpreter`, and processes the inference results.
-  func runModel(onFrame pixelBuffer: CVPixelBuffer) -> Result? {
+  func runModel(onFrame pixelBuffer: MLImage) -> Result? {
     
-    let sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer)
-    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB ||
-             sourcePixelFormat == kCVPixelFormatType_32BGRA ||
-               sourcePixelFormat == kCVPixelFormatType_32RGBA)
+//    let sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer)
+//    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB ||
+//             sourcePixelFormat == kCVPixelFormatType_32BGRA ||
+//               sourcePixelFormat == kCVPixelFormatType_32RGBA)
+//
+//
+//    let imageChannels = 4
+//    assert(imageChannels >= inputChannels)
+//
+//    // Crops the image to the biggest square in the center and scales it down to model dimensions.
+//    let scaledSize = CGSize(width: inputWidth, height: inputHeight)
+//    guard let thumbnailPixelBuffer = pixelBuffer.centerThumbnail(ofSize: scaledSize) else {
+//      return nil
+//    }
 
-
-    let imageChannels = 4
-    assert(imageChannels >= inputChannels)
-
-    // Crops the image to the biggest square in the center and scales it down to model dimensions.
-    let scaledSize = CGSize(width: inputWidth, height: inputHeight)
-    guard let thumbnailPixelBuffer = pixelBuffer.centerThumbnail(ofSize: scaledSize) else {
-      return nil
-    }
-
-    let interval: TimeInterval
-    let outputTensor: Tensor
     do {
-      let inputTensor = try interpreter.input(at: 0)
+      
+      let classificationResults: ClassificationResult = try imageClassifier.classify(
+        gmlImage: pixelBuffer)
+//      print(classificationResults.classifications[0].categories[0].label);
+//      print(classificationResults.classifications[0].categories[0].score);
 
-      // Remove the alpha component from the image buffer to get the RGB data.
-      guard let rgbData = rgbDataFromBuffer(
-        thumbnailPixelBuffer,
-        byteCount: batchSize * inputWidth * inputHeight * inputChannels,
-        isModelQuantized: inputTensor.dataType == .uInt8
-      ) else {
-        print("Failed to convert the image buffer to RGB data.")
-        return nil
-      }
-
-      // Copy the RGB data to the input `Tensor`.
-      try interpreter.copy(rgbData, toInputAt: 0)
-
-      // Run inference by invoking the `Interpreter`.
-      let startDate = Date()
-      try interpreter.invoke()
-      interval = Date().timeIntervalSince(startDate) * 1000
-
-      // Get the output `Tensor` to process the inference results.
-      outputTensor = try interpreter.output(at: 0)
+//      let inputTensor = try interpreter.input(at: 0)
+//
+//      // Remove the alpha component from the image buffer to get the RGB data.
+//      guard let rgbData = rgbDataFromBuffer(
+//        thumbnailPixelBuffer,
+//        byteCount: batchSize * inputWidth * inputHeight * inputChannels,
+//        isModelQuantized: inputTensor.dataType == .uInt8
+//      ) else {
+//        print("Failed to convert the image buffer to RGB data.")
+//        return nil
+//      }
+//
+//      // Copy the RGB data to the input `Tensor`.
+//      try interpreter.copy(rgbData, toInputAt: 0)
+//
+//      // Run inference by invoking the `Interpreter`.
+//      let startDate = Date()
+//      try interpreter.invoke()
+//      interval = Date().timeIntervalSince(startDate) * 1000
+//
+//      // Get the output `Tensor` to process the inference results.
+//      outputTensor = try interpreter.output(at: 0)
     } catch let error {
       print("Failed to invoke the interpreter with error: \(error.localizedDescription)")
       return nil
     }
 
-    let results: [Float]
-    switch outputTensor.dataType {
-    case .uInt8:
-      guard let quantization = outputTensor.quantizationParameters else {
-        print("No results returned because the quantization values for the output tensor are nil.")
-        return nil
-      }
-      let quantizedResults = [UInt8](outputTensor.data)
-      results = quantizedResults.map {
-        quantization.scale * Float(Int($0) - quantization.zeroPoint)
-      }
-    case .float32:
-      results = [Float32](unsafeData: outputTensor.data) ?? []
-    default:
-      print("Output tensor data type \(outputTensor.dataType) is unsupported for this example app.")
-      return nil
-    }
-
-    // Process the results.
-    let topNInferences = getTopN(results: results)
+//    let results: [Float]
+//    switch outputTensor.dataType {
+//    case .uInt8:
+//      guard let quantization = outputTensor.quantizationParameters else {
+//        print("No results returned because the quantization values for the output tensor are nil.")
+//        return nil
+//      }
+//      let quantizedResults = [UInt8](outputTensor.data)
+//      results = quantizedResults.map {
+//        quantization.scale * Float(Int($0) - quantization.zeroPoint)
+//      }
+//    case .float32:
+//      results = [Float32](unsafeData: outputTensor.data) ?? []
+//    default:
+//      print("Output tensor data type \(outputTensor.dataType) is unsupported for this example app.")
+//      return nil
+//    }
+//
+//    // Process the results.
+//    let topNInferences = getTopN(results: results)
 
     // Return the inference time and inference results.
-    return Result(inferenceTime: interval, inferences: topNInferences)
+    return nil
   }
 
   // MARK: - Private Methods

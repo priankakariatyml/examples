@@ -14,6 +14,7 @@
 
 import UIKit
 import AVFoundation
+import TensorFlowLiteTaskVision
 
 // MARK: CameraFeedManagerDelegate Declaration
 protocol CameraFeedManagerDelegate: class {
@@ -21,7 +22,7 @@ protocol CameraFeedManagerDelegate: class {
   /**
   This method delivers the pixel buffer of the current frame seen by the device's camera.
  */
-  func didOutput(pixelBuffer: CVPixelBuffer)
+  func didOutput(sampleBuffer: CMSampleBuffer)
 
   /**
    This method initimates that the camera permissions have been denied.
@@ -250,7 +251,8 @@ class CameraFeedManager: NSObject {
     let sampleBufferQueue = DispatchQueue(label: "sampleBufferQueue")
     videoDataOutput.setSampleBufferDelegate(self, queue: sampleBufferQueue)
     videoDataOutput.alwaysDiscardsLateVideoFrames = true
-    videoDataOutput.videoSettings = [ String(kCVPixelBufferPixelFormatTypeKey) : kCMPixelFormat_32BGRA]
+    videoDataOutput.videoSettings = [ String(kCVPixelBufferPixelFormatTypeKey) : kCVPixelFormatType_32BGRA
+    ];
 
     if session.canAddOutput(videoDataOutput) {
       session.addOutput(videoDataOutput)
@@ -332,15 +334,61 @@ extension CameraFeedManager: AVCaptureVideoDataOutputSampleBufferDelegate {
  */
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 
-    // Converts the CMSampleBuffer to a CVPixelBuffer.
-    let pixelBuffer: CVPixelBuffer? = CMSampleBufferGetImageBuffer(sampleBuffer)
+//    let bundle = Bundle.main
+//    guard let modelPath = bundle.path(
+//      forResource: "mobilenet_quant_v1_224",
+//      ofType: "tflite") {
+//        return
+//      }
+//    
+//    let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+//    
+//    let maxResults = 3
+//    imageClassifierOptions.classificationOptions.maxResults = maxResults
+//    
+//    do {
+//    try ImageClassifier.imageClassifier(options: imageClassifierOptions)
+//    }
+//    catch {
+//      
+//    }
+//    
+//    do {
+//      try imageClassifier.classify(
+//        gmlImage: gmlImage)
+//    }
+//    catch {
+//      
+//    }
+//    
+    
+  
 
-    guard let imagePixelBuffer = pixelBuffer else {
-      return
-    }
+    // Converts the CMSampleBuffer to a CVPixelBuffer.
+    
+    
+//    guard let imagePixelBuffer = pixelBuffer else {
+//      return
+//    }
+//
+//    CVPixelBufferLockBaseAddress(imagePixelBuffer, CVPixelBufferLockFlags.readOnly);
+//    let buffer =  CVPixelBufferGetBaseAddress(imagePixelBuffer);
+//    let eBuffer = buffer!.bindMemory(to: UInt8.self, capacity: CVPixelBufferGetWidth(imagePixelBuffer) * CVPixelBufferGetHeight(imagePixelBuffer) * 4)
+//
+//    for col in 0..<4 {
+//      for row in 0..<4 {
+//        let offset = 4 * (row * CVPixelBufferGetWidth(imagePixelBuffer) + col);
+//        print(eBuffer[offset]);
+//        print(eBuffer[offset + 1]);
+//        print(eBuffer[offset + 2]);
+//        print(eBuffer[offset + 3]);
+//      }
+//    }
+//    CVPixelBufferUnlockBaseAddress(imagePixelBuffer, CVPixelBufferLockFlags.readOnly);
 
     // Delegates the pixel buffer to the ViewController.
-    delegate?.didOutput(pixelBuffer: imagePixelBuffer)
+    delegate?.didOutput(sampleBuffer: sampleBuffer)
+    
   }
 
 }

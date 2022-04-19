@@ -14,6 +14,7 @@
 
 import AVFoundation
 import UIKit
+import TensorFlowLiteTaskVision
 
 class ViewController: UIViewController {
 
@@ -120,19 +121,19 @@ class ViewController: UIViewController {
   }
 
   @objc func classifyPasteboardImage() {
-    guard let image = UIPasteboard.general.images?.first else {
-      return
-    }
-
-    guard let buffer = CVImageBuffer.buffer(from: image) else {
-      return
-    }
-
-    previewView.image = image
-
-    DispatchQueue.global().async {
-      self.didOutput(pixelBuffer: buffer)
-    }
+//    guard let image = UIPasteboard.general.images?.first else {
+//      return
+//    }
+//
+//    guard let buffer = CVImageBuffer.buffer(from: image) else {
+//      return
+//    }
+//
+//    previewView.image = image
+//
+//    DispatchQueue.global().async {
+//      self.didOutput(sampleBuffer: buffer)
+//    }
   }
 
   deinit {
@@ -157,22 +158,26 @@ extension ViewController: InferenceViewControllerDelegate {
 // MARK: CameraFeedManagerDelegate Methods
 extension ViewController: CameraFeedManagerDelegate {
 
-  func didOutput(pixelBuffer: CVPixelBuffer) {
-    let currentTimeMs = Date().timeIntervalSince1970 * 1000
-    guard (currentTimeMs - previousInferenceTimeMs) >= delayBetweenInferencesMs else { return }
-    previousInferenceTimeMs = currentTimeMs
+  func didOutput(sampleBuffer: CMSampleBuffer) {
+//    let currentTimeMs = Date().timeIntervalSince1970 * 1000
+//    guard (currentTimeMs - previousInferenceTimeMs) >= delayBetweenInferencesMs else { return }
+//    previousInferenceTimeMs = currentTimeMs
 
     // Pass the pixel buffer to TensorFlow Lite to perform inference.
-    result = modelDataHandler?.runModel(onFrame: pixelBuffer)
-
-    // Display results by handing off to the InferenceViewController.
-    DispatchQueue.main.async {
-      let resolution = CGSize(width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
-      self.inferenceViewController?.inferenceResult = self.result
-      self.inferenceViewController?.resolution = resolution
-      self.inferenceViewController?.tableView.reloadData()
+    guard let gmlImage = MLImage(sampleBuffer: sampleBuffer) else {
+     return
     }
-  }
+    
+
+    result = modelDataHandler?.runModel(onFrame: gmlImage)
+//
+//    // Display results by handing off to the InferenceViewController.
+//    DispatchQueue.main.async {
+//      let resolution = CGSize(width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
+//      self.inferenceViewController?.inferenceResult = self.result
+//      self.inferenceViewController?.resolution = resolution
+//      self.inferenceViewController?.tableView.reloadData()
+    }
 
   // MARK: Session Handling Alerts
   func sessionWasInterrupted(canResumeManually resumeManually: Bool) {
