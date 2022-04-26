@@ -27,7 +27,8 @@
    * specified buffer size is shorter than the buffer size supported by AVAUdioEngine only the most
    * recent data of the buffer of size bufferSize will be stored by the ring buffer. */
   TFLRingBuffer *_ringBuffer;
-  dispatch_queue_t _delegateQueue;
+  dispatch_queue_t _conversionQueue;
+  BOOL _tapStateSuccess;
 }
 
 - (nullable instancetype)initWithAudioFormat:(TFLAudioFormat *)audioFormat
@@ -46,8 +47,8 @@
     _audioEngine = [[AVAudioEngine alloc] init];
     _bufferSize = sampleCount * audioFormat.channelCount;
     _ringBuffer = [[TFLRingBuffer alloc] initWithBufferSize:sampleCount * audioFormat.channelCount];
-    _delegateQueue =
-        dispatch_queue_create("com.tflAudio.AudioConversionQueue", DISPATCH_QUEUE_CONCURRENT);
+    _conversionQueue = dispatch_queue_create("com.tflAudio.AudioConversionQueue", NULL);
+    _tapStateSuccess = YES;
   }
   return self;
 }
@@ -61,8 +62,8 @@
  * different thread. There will also be extra overhead to ensure thread safety to make sure that
  * reads and writes happen on the same thread sine TFLAudioTensor buffer is meant to be non local.
  */
-- (void)startTappingMicrophoneWithCompletionHandler:
-    (void (^)(TFLFloatBuffer *_Nullable buffer, NSError *_Nullable error))completionHandler {
+- (BOOL)startTappingMicrophoneWithError:(NSError **)error {
+  //    (void (^)(TFLFloatBuffer *_Nullable buffer, NSError *_Nullable error))completionHandler {
   AVAudioNode *inputNode = [_audioEngine inputNode];
   AVAudioFormat *format = [inputNode outputFormatForBus:0];
 
@@ -82,7 +83,7 @@
            bufferSize:(AVAudioFrameCount)self.bufferSize
                format:recordingFormat
                 block:^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
-                  dispatch_barrier_async(self->_delegateQueue, ^{
+                  dispatch_async(self->_conversionQueue, ^{
                     // Capacity of converted PCM buffer is calculated in order to maintain the same
                     // latency as the input pcmBuffer.
                     AVAudioFrameCount capacity =
@@ -108,73 +109,85 @@
 
                     switch (converterStatus) {
                       case AVAudioConverterOutputStatus_HaveData: {
-                        TFLFloatBuffer *floatBuffer =
-                            [[TFLFloatBuffer alloc] initWithData:pcmBuffer.floatChannelData[0]
-                                                            size:pcmBuffer.frameLength];
-
-                        NSError *frameBufferFormatError = nil;
-                        NSError *loadError = nil;
-
+                            
                         if (pcmBuffer.frameLength == 0) {
-                          [TFLUtils createCustomError:&frameBufferFormatError
-                                             withCode:TFLAudioErrorCodeInvalidArgumentError
-                                          description:@"You may have to try with a different "
-                                                      @"channel count or sample rate"];
-                          completionHandler(nil, frameBufferFormatError);
+                          self->_tapStateSuccess = NO;
                         } else if ((pcmBuffer.frameLength % recordingFormat.channelCount) != 0) {
-                          [TFLUtils
-                              createCustomError:&frameBufferFormatError
-                                       withCode:TFLAudioErrorCodeInvalidArgumentError
-                                    description:
-                                        @"You have passed an unsupported number of channels."];
-                          completionHandler(nil, frameBufferFormatError);
-                        } else if (![self->_ringBuffer loadBuffer:floatBuffer
-                                                               offset:0
-                                                                 size:floatBuffer.size
-                                                                error:&loadError]) {
-                          completionHandler(nil, loadError);
+                          self->_tapStateSuccess = NO;
+                        } else if (![self->_ringBuffer loadBuffer:[[TFLFloatBuffer alloc] initWithData:pcmBuffer.floatChannelData[0]
+                                                                                                  size:pcmBuffer.frameLength]
+                                                           offset:0
+                                                             size:pcmBuffer.frameLength
+                                                            error:nil]) {
+                          self->_tapStateSuccess = NO;
+
                         } else {
-                          TFLFloatBuffer *outFloatBuffer = [self->_ringBuffer.buffer copy];
-                          completionHandler(outFloatBuffer, nil);
+                          NSLog(@"%f",pcmBuffer.floatChannelData[0][0]);
+                          self->_tapStateSuccess = YES;
                         }
                         break;
                       }
                       case AVAudioConverterOutputStatus_Error: {
-                        completionHandler(nil, conversionError);
+                        self->_tapStateSuccess = NO;
                         break;
                       }
                       default:
-                        completionHandler(nil, nil);
+                        self->_tapStateSuccess = NO;
                         break;
                     }
                   });
                 }];
 
-  NSError *engineStartError = nil;
-
   [_audioEngine prepare];
-  [_audioEngine startAndReturnError:&engineStartError];
-
-  if (engineStartError) {
-    completionHandler(nil, engineStartError);
+  [_audioEngine startAndReturnError:error];
+  if (error) {
+    return NO;
   }
+  
+  return YES;
 }
 
-- (void)startRecordingWithCompletionHandler:
-    (void (^)(TFLFloatBuffer *_Nullable buffer, NSError *_Nullable error))completionHandler {
+- (void)startRecordingWithCompletionHandler:(void (^)(NSError *_Nullable))completionHandler {
+  //    (void (^)(TFLFloatBuffer *_Nullable buffer, NSError *_Nullable error))completionHandler {
   [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
     if (granted) {
-      [self startTappingMicrophoneWithCompletionHandler:^(TFLFloatBuffer *_Nullable buffer,
-                                                          NSError *_Nullable error) {
-        completionHandler(buffer, error);
-      }];
+      NSError *tapError = nil;
+      [self startTappingMicrophoneWithError:&tapError];
+      completionHandler(tapError);
     } else {
       NSError *permissionError = nil;
-      [TFLUtils createCustomError:&permissionError                 withCode:TFLAudioErrorCodeRecordPermissionDeniedError description:@"User denied the permission to record mic input."];
+      [TFLUtils createCustomError:&permissionError
+                         withCode:TFLAudioErrorCodeRecordPermissionDeniedError
+                      description:@"User denied the permission to record mic input."];
 
-      completionHandler(nil, permissionError);
+      completionHandler(permissionError);
     }
   }];
+}
+
+- (nullable TFLFloatBuffer *)readAtOffset:(NSUInteger)offset
+                        withSize:(NSUInteger)size
+                           error:(NSError *_Nullable *)error {
+  if (!_tapStateSuccess) {
+    [TFLUtils createCustomError:error
+                       withCode:TFLAudioErrorCodeAudioProcessingError
+                    description:@"Some error occured during audio processing"];
+    return nil;
+  }
+  if (offset + size > _ringBuffer.buffer.size) {
+    [TFLUtils createCustomError:error
+                       withCode:TFLAudioErrorCodeInvalidArgumentError
+                    description:@"Index out of bounds: offset + size should be <= to the size of "
+                                @"TFLAudioRecord's internal buffer. "];
+    return nil;
+  }
+  __block TFLFloatBuffer *bufferToReturn;
+  bufferToReturn = [[TFLFloatBuffer alloc] initWithSize:size];
+  dispatch_sync(_conversionQueue, ^{
+    memcpy(bufferToReturn.data, _ringBuffer.buffer.data + offset, size);
+  });
+
+  return bufferToReturn;
 }
 
 - (void)stop {

@@ -67,6 +67,7 @@ public class SoundClassifier {
             
       // This will be handled by Task Library.
       let inputTensorData = Data(buffer: UnsafeBufferPointer(start: inputBuffer.data, count: Int(inputBuffer.size)))
+//      print("CLassifier Data \(inputBuffer.data[0])")
 
       try interpreter.copy(inputTensorData , toInputAt: audioBufferInputTensorIndex)
       try interpreter.invoke()
@@ -79,6 +80,7 @@ public class SoundClassifier {
     
     // Gets the formatted and averaged results.
     let probabilities = dataToFloatArray(outputTensor.data) ?? []
+    print(probabilities)
     delegate?.soundClassifier(self, didInterpreteProbabilities: probabilities)
   }
 

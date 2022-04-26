@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, TFLAudioErrorCode) {
   TFLAudioErrorCodeInvalidArgumentError = 2,
 
   TFLAudioErrorCodeAudioProcessingError = 3,
-  
+
   /** Record permissions denied by user*/
   TFLAudioErrorCodeRecordPermissionDeniedError = 4,
 

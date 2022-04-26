@@ -20,7 +20,7 @@ static NSString *const TFLAudioErrorDomain = @"org.gml.audio";
 
 @implementation TFLUtils
 
-+ (void)createCustomError:(NSError **)error
++ (void)createCustomError:(NSError * _Nullable *)error
                  withCode:(NSInteger)code
               description:(NSString *)description {
   if (error) {

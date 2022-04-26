@@ -39,9 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Boolean indicating success or failure of loading operation.
  */
 - (BOOL)loadBuffer:(TFLFloatBuffer *)sourceBuffer
-                offset:(NSUInteger)offset
-                  size:(NSUInteger)size
-                 error:(NSError **)error;
+            offset:(NSUInteger)offset
+              size:(NSUInteger)size
+             error:(NSError **)error;
+
+- (TFLFloatBuffer *)floatBuffer;
 
 @end
 

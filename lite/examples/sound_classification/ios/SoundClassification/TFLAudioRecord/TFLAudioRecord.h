@@ -28,8 +28,8 @@ NS_SWIFT_NAME(AudioRecord)
 /** Audio format specifying the number of channels and sample rate supported. */
 @property(nonatomic, readonly) TFLAudioFormat *audioFormat;
 
-/** Size of the buffer held by TFLAudioRecord. It ensures delivery of audio data of length bufferSize
- * arrays when you tap the input microphone. */
+/** Size of the buffer held by TFLAudioRecord. It ensures delivery of audio data of length
+ * bufferSize arrays when you tap the input microphone. */
 @property(nonatomic, readonly) NSUInteger bufferSize;
 
 /**
@@ -57,10 +57,13 @@ NS_SWIFT_NAME(AudioRecord)
  * error failing to do so .
  *
  */
-- (void)startRecordingWithCompletionHandler:
-    (void (^)(TFLFloatBuffer *_Nullable buffer, NSError *_Nullable error))completionHandler;
+- (void)startRecordingWithCompletionHandler:(void (^)(NSError *_Nullable error))completionHandler;
 
 - (void)stop;
+
+- (nullable TFLFloatBuffer *)readAtOffset:(NSUInteger)offset
+                        withSize:(NSUInteger)size
+                           error:(NSError *_Nullable *)error;
 
 @end
 

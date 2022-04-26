@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) NSUInteger size;
 
 /** Pointer to float array wrapped by TFLFloatBuffer. */
-@property(nonatomic, readonly) float *data;
+@property(nonatomic, readonly, assign) float *data;
 
 /**
  * Initializes a TFLFloatBuffer by copying the array specified in the arguments.

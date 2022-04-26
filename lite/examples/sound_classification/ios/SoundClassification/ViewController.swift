@@ -42,12 +42,18 @@ class ViewController: UIViewController {
     
     audioTensor = AudioTensor(audioFormat: audioFormat, sampleCount: UInt(soundClassifier.sampleRate))
     
+//    startAudioRecognition()
+//    let flBuffer = TFLFloatBuffer(size: 10000)
+    
+//    print("Heello")
+    
     // Initialize audio record and gmlAudio with same buffer size and audio format as GMLAudio.
     // Once we move to the
-    
     do {
       audioRecord = try AudioRecord(audioFormat: audioFormat, sampleCount: UInt(soundClassifier.sampleRate))
-      startAudioRecognition()
+      DispatchQueue.global(qos: .background).async {
+        self.startAudioRecognition()
+      }
 
     }
     catch {
@@ -59,21 +65,52 @@ class ViewController: UIViewController {
 
   /// Starts tapping AuudioRecord and recognizing on the output buffers
   private func startAudioRecognition() {
-    audioRecord?.startRecording {[weak self] buffer, error in
-      if let selfPtr = self, let
-           resultBuffer = buffer  {
+//    let flBuffer = TFLFloatBuffer(size: 10000)
 
-        do {
-          try selfPtr.audioTensor.loadAudioRecordBuffer(buffer: resultBuffer)
-          selfPtr.soundClassifier.start(inputBuffer: selfPtr.audioTensor.buffer())
-        }
-        catch {
+    audioRecord?.startRecording { error in
+      print(error?.localizedDescription)
+      while true {
+      do {
+        
+        try self.audioTensor.loadAudioRecord(audioRecord: self.audioRecord!)
+        //      let audioTensorBuffer = TFLFloatBuffer(size: 40000)
+        let audioTensorBuffer = self.audioTensor.ringBuffer.floatBuffer()
+        print("DATA \(audioTensorBuffer.data[0])")
 
-        }
+        self.soundClassifier.start(inputBuffer: audioTensorBuffer)
+        
+        //      TFLFloatBuffer *floatBuffer = [[TFLFloatBuffer alloc] initWithSize:_buffer.size];
+        //      //  NSLog(@"%d",self.buffer.size);
+        //
+        //      // Return buffer in correct order.
+        //      // Buffer's beginning is marked by nextIndex.
+        //      // Copy the first chunk starting at position nextindex to the destination buffer's
+        //      // beginning.
+        //      NSInteger endChunkSize = _buffer.size - nextIndex;
+        //      memcpy(floatBuffer.data, _buffer.data + nextIndex, sizeof(float) * endChunkSize);
+        //
+        //      // Copy the next chunk starting at position 0 until next index to the destination buffer
+        //      // locations after the chunk size that was previously copied.
+        //      memcpy(floatBuffer.data + endChunkSize, _buffer.data, sizeof(float) * nextIndex);
+        
       }
-    }
+      
+      catch {
+        print(error.localizedDescription)
+      }
+      }
   }
 
+//  DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//    for i in 0..<100000 {
+//
+//
+////    print("Sum of times: \(time1 + time2)")
+//  }
+//  }
+//
+   
+}
 }
 
 extension ViewController {
@@ -106,6 +143,7 @@ extension ViewController: SoundClassifierDelegate {
   ) {
     self.probabilities = probabilities
     DispatchQueue.main.async {
+      print(self.probabilities)
       self.tableView.reloadData()
     }
   }
