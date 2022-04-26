@@ -66,7 +66,8 @@ public class SoundClassifier {
     do {
             
       // This will be handled by Task Library.
-      let inputTensorData = Data(buffer: UnsafeBufferPointer(start: inputBuffer.data, count: Int(inputBuffer.size)))
+      let flBuffer: TFLFloatBuffer = inputBuffer.copy() as! TFLFloatBuffer
+      let inputTensorData = Data(buffer: UnsafeBufferPointer(start: flBuffer.data, count: Int(flBuffer.size)))
       print("CLassifier Data \(inputBuffer.data[0]), Size: \(inputBuffer.size)")
 
       try interpreter.copy(inputTensorData , toInputAt: audioBufferInputTensorIndex)

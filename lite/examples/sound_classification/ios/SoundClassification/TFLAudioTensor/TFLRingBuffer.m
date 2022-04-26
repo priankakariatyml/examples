@@ -62,7 +62,8 @@
 
     nextIndex = (nextIndex + sizeToCopy) % _buffer.size;
   }
-
+  
+  
   return YES;
 }
 

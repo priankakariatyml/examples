@@ -69,14 +69,17 @@ class ViewController: UIViewController {
 
     audioRecord?.startRecording { error in
       print(error?.localizedDescription)
-      while true {
+     
+  }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+    while true {
       do {
         
         try self.audioTensor.loadAudioRecord(audioRecord: self.audioRecord!)
         //      let audioTensorBuffer = TFLFloatBuffer(size: 40000)
         let audioTensorBuffer = self.audioTensor.ringBuffer.floatBuffer()
         print("DATA \(audioTensorBuffer.data[0])")
-
+        
         self.soundClassifier.start(inputBuffer: audioTensorBuffer)
         
         //      TFLFloatBuffer *floatBuffer = [[TFLFloatBuffer alloc] initWithSize:_buffer.size];
@@ -98,8 +101,8 @@ class ViewController: UIViewController {
       catch {
         print(error.localizedDescription)
       }
-      }
-  }
+    }
+    }
 
 //  DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
 //    for i in 0..<100000 {
