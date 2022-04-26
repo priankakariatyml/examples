@@ -67,7 +67,7 @@ public class SoundClassifier {
             
       // This will be handled by Task Library.
       let inputTensorData = Data(buffer: UnsafeBufferPointer(start: inputBuffer.data, count: Int(inputBuffer.size)))
-//      print("CLassifier Data \(inputBuffer.data[0])")
+      print("CLassifier Data \(inputBuffer.data[0]), Size: \(inputBuffer.size)")
 
       try interpreter.copy(inputTensorData , toInputAt: audioBufferInputTensorIndex)
       try interpreter.invoke()
