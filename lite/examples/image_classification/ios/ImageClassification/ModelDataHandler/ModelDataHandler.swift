@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import CoreImage
-import TensorFlowLite
 import UIKit
 import Accelerate
 import TensorFlowLiteTaskVision
@@ -132,8 +131,8 @@ class ModelDataHandler {
       
       let classificationResults: ClassificationResult = try imageClassifier.classify(
         gmlImage: pixelBuffer)
-//      print(classificationResults.classifications[0].categories[0].label);
-//      print(classificationResults.classifications[0].categories[0].score);
+      print(classificationResults.classifications[0].categories[0].label);
+      print(classificationResults.classifications[0].categories[0].score);
 
 //      let inputTensor = try interpreter.input(at: 0)
 //

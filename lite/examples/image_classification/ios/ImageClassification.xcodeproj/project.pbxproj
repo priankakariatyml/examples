@@ -13,6 +13,7 @@
 		AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */; };
 		AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7C21355CCC00F9BD4B /* labels.txt */; };
 		AAAB096E218981FA0015A1F2 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */; };
+		AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */; };
 		AABFCBB2213FE0B100C0A67B /* ModelDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */; };
 		AAE79E5A213521DA00E7AC1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79E59213521DA00E7AC1F /* AppDelegate.swift */; };
 		AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE79E5D213521DA00E7AC1F /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_quant_v1_224.tflite; sourceTree = "<group>"; };
 		AA5FEB7C21355CCC00F9BD4B /* labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
 		AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
+		AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_v2_1.0_224.tflite; sourceTree = "<group>"; };
 		AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDataHandler.swift; sourceTree = "<group>"; };
 		AAE79E56213521DA00E7AC1F /* ImageClassification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageClassification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE79E59213521DA00E7AC1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +74,6 @@
 				E7F867EEDB032059F98AA497 /* Pods-ImageClassification.debug.xcconfig */,
 				14CAE291077E814D03E79CB3 /* Pods-ImageClassification.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -95,6 +96,7 @@
 		AA5FEB7A21355CCC00F9BD4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */,
 				AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */,
 				AA5FEB7C21355CCC00F9BD4B /* labels.txt */,
 			);
@@ -243,6 +245,7 @@
 			files = (
 				AAE79E64213521DB00E7AC1F /* LaunchScreen.storyboard in Resources */,
 				AAE79E61213521DB00E7AC1F /* Assets.xcassets in Resources */,
+				AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */,
 				AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */,
 				AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */,
 				AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */,
@@ -455,7 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R828ZATN6C;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -466,7 +469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -482,7 +485,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R828ZATN6C;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -493,7 +496,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
