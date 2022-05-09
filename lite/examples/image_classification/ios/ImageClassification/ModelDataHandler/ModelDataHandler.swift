@@ -66,6 +66,12 @@ class ModelDataHandler {
 
   /// TensorFlow Lite `Interpreter` object for performing inference on a given model.
   private var imageClassifier: ImageClassifier
+  
+  private var objectDetector: ObjectDetector?
+  
+  private var imageSegmenter: ImageSegmenter?
+
+
 
   /// Information about the alpha component in RGBA data.
   private let alphaComponent = (baseOffset: 4, moduloRemainder: 3)
@@ -93,12 +99,26 @@ class ModelDataHandler {
     do {
       // Create the `Interpreter`.
       let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
-      
+
       let maxResults = 3
       imageClassifierOptions.classificationOptions.maxResults = maxResults
-      
-      imageClassifier = try ImageClassifier.imageClassifier(options: imageClassifierOptions)
+
+      imageClassifier = try ImageClassifier.classifier(options: imageClassifierOptions)
      
+      let objectPath = Bundle.main.path(forResource: "coco_ssd_mobilenet_v1_1.0_quant_2018_06_29", ofType: "tflite")!
+      let objectDetectorOptions = ObjectDetectorOptions(modelPath: objectPath)
+      
+      objectDetectorOptions.classificationOptions.maxResults = maxResults
+      
+      objectDetector = try ObjectDetector.detector(options: objectDetectorOptions)
+      
+      let segmentPath = Bundle.main.path(forResource: "deeplabv3", ofType: "tflite")!
+      let imageSegmenterOptions = ImageSegmenterOptions(modelPath: segmentPath)
+//      imageSegmenterOptions.outputType = OutputType.cate
+      
+      imageSegmenter = try ImageSegmenter.segmenter(options: imageSegmenterOptions)
+s
+      
     } catch let error {
       print("Failed to create the interpreter with error: \(error.localizedDescription)")
       return nil
@@ -129,10 +149,24 @@ class ModelDataHandler {
 
     do {
       
-      let classificationResults: ClassificationResult = try imageClassifier.classify(
-        gmlImage: pixelBuffer)
-      print(classificationResults.classifications[0].categories[0].label);
-      print(classificationResults.classifications[0].categories[0].score);
+//      let classificationResults: ClassificationResult = try imageClassifier.classify(
+//        mlImage: pixelBuffer)
+//      print(classificationResults.classifications[0].categories[0].label);
+//      print(classificationResults.classifications[0].categories[0].score);
+      
+//        let detectionResult: DetectionResult? = try objectDetector?.detect(
+//                mlImage: pixelBuffer)
+//              print(detectionResult?.detections[0].categories[0].label);
+//              print(detectionResult?.detections[0].categories[0].score);
+//
+      let segmentationResult: SegmentationResult? = try imageSegmenter?.segment(
+        mlImage: pixelBuffer)
+      
+      print("cat \(segmentationResult?.segmentations[0].categoryMask)");
+      print("cat \(segmentationResult?.segmentations[0].categoryMask?.mask[0])");
+      
+      print("conf \(segmentationResult?.segmentations[0].confidenceMasks)");
+      print("conf \(segmentationResult?.segmentations[0].confidenceMasks?[0].mask[0])");
 
 //      let inputTensor = try interpreter.input(at: 0)
 //
