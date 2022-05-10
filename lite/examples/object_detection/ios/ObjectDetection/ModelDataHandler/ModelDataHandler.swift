@@ -118,11 +118,11 @@ class ModelDataHandler: NSObject {
       guard let gmlImage = MLImage(sampleBuffer: sampleBuffer) else {
         return nil;
       }
-      let objectDetectionResult = try objectDetector.detect(gmlImage: gmlImage)
+      let detectionResult = try objectDetector.detect(gmlImage: gmlImage)
       
       print("Top 3 Objects Detected")
 
-      for (idx, detection) in objectDetectionResult.detections.enumerated() {
+      for (idx, detection) in detectionResult.detections.enumerated() {
         guard let label = detection.categories[0].label else {
           return nil;
         }
