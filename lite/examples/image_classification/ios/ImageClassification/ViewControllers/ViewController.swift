@@ -164,12 +164,9 @@ extension ViewController: CameraFeedManagerDelegate {
 //    previousInferenceTimeMs = currentTimeMs
 
     // Pass the pixel buffer to TensorFlow Lite to perform inference.
-    guard let gmlImage = MLImage(sampleBuffer: sampleBuffer) else {
-     return
-    }
     
 
-    result = modelDataHandler?.runModel(onFrame: gmlImage)
+    result = modelDataHandler?.runModel(on: sampleBuffer)
 //
 //    // Display results by handing off to the InferenceViewController.
 //    DispatchQueue.main.async {

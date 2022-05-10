@@ -65,13 +65,7 @@ class ModelDataHandler {
   private var labels: [String] = []
 
   /// TensorFlow Lite `Interpreter` object for performing inference on a given model.
-//  private var imageClassifier: ImageClassifier
-  
-  private var objectDetector: ObjectDetector?
-  
-  private var imageSegmenter: ImageSegmenter?
-
-
+  private var imageClassifier: ImageClassifier
 
   /// Information about the alpha component in RGBA data.
   private let alphaComponent = (baseOffset: 4, moduloRemainder: 3)
@@ -91,317 +85,47 @@ class ModelDataHandler {
       print("Failed to load the model file with name: \(modelFilename).")
       return nil
     }
-
-    var imageClassifier: ImageClassifier
-
-    guard let modelPath = Bundle.main.path(forResource: "your_model_file_name",
-                                           ofType: "tflite") else {
-      return
-    }
-
-    let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+    
+    let options = ImageClassifierOptions(modelPath: modelPath)
+    options.classificationOptions.maxResults = resultCount
+  
     do {
-      imageClassifier = try ImageClassifier.imageClassifier(options: imageClassifierOptions)
-      guard let image = UIImage (named: "your_input_image_name"), let mlImage = MLImage(image: image) else {
-        return
-      }
-      do {
-        let classificationResults: ClassificationResult = try imageClassifier.classify(gmlImage: mlImage)
+        imageClassifier = try ImageClassifier.imageClassifier(options: options)
       }
       catch {
-        // Handle failure.
+        print("Failed to create the classifier with error: \(error.localizedDescription)")
+        return nil
       }
-    }
-    catch {
-      // Handle failure. Check error.localizedDescription to understand the reason for failure.
-    }
-
-    // Run inference
-    // There are other sources for MLImage. For more details, please see:
-    // https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
-    
-
-    // Specify the options for the `Interpreter`.
-//    self.threadCount = threadCount
-//    var options = InterpreterOptions()
-//    options.threadCount = threadCount
-//    var imageClassPrivate: ImageClassifier
-
-//    do {
-//      // Create the `Interpreter`.
-//      let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
-////
-////      let maxResults = 3
-////      imageClassifierOptions.classificationOptions.maxResults = maxResults
-////
-////      imageClassifier = try ImageClassifier.classifier(options: imageClassifierOptions)
-////
-////      let objectPath = Bundle.main.path(forResource: "coco_ssd_mobilenet_v1_1.0_quant_2018_06_29", ofType: "tflite")!
-////      let objectDetectorOptions = ObjectDetectorOptions(modelPath: objectPath)
-////
-////      objectDetectorOptions.classificationOptions.maxResults = maxResults
-////
-////      objectDetector = try ObjectDetector.detector(options: objectDetectorOptions)
-////
-////      let segmentPath = Bundle.main.path(forResource: "deeplabv3", ofType: "tflite")!
-////      let imageSegmenterOptions = ImageSegmenterOptions(modelPath: segmentPath)
-//////      imageSegmenterOptions.outputType = OutputType.cate
-////
-////      imageSegmenter = try ImageSegmenter.segmenter(options: imageSegmenterOptions)
-////
-//      imageClassPrivate  = try ImageClassifier.classifier(options: imageClassifierOptions)
-//
-//    } catch let error {
-//      print("Failed to create the interpreter with error: \(error.localizedDescription)")
-//      return nil
-//    }
-//
-//    guard let image = UIImage (named: ""), let mlImage = MLImage(image: image) else {
-//      return
-//    }
-//
-//    UIImage(named: "")
-//
-//   try! imageClassPrivate.classify(mlImage: mlImage)
-    // Load the classes listed in the labels file.
-//    loadLabels(fileInfo: labelsFileInfo)
   }
 
   // MARK: - Internal Methods
 
   /// Performs image preprocessing, invokes the `Interpreter`, and processes the inference results.
-  func runModel(onFrame pixelBuffer: MLImage) -> Result? {
+  func runModel(on sampleBuffer: CMSampleBuffer) -> Result? {
     
-//    let sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer)
-//    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB ||
-//             sourcePixelFormat == kCVPixelFormatType_32BGRA ||
-//               sourcePixelFormat == kCVPixelFormatType_32RGBA)
-//
-//
-//    let imageChannels = 4
-//    assert(imageChannels >= inputChannels)
-//
-//    // Crops the image to the biggest square in the center and scales it down to model dimensions.
-//    let scaledSize = CGSize(width: inputWidth, height: inputHeight)
-//    guard let thumbnailPixelBuffer = pixelBuffer.centerThumbnail(ofSize: scaledSize) else {
-//      return nil
-//    }
-
     do {
+      guard let gmlImage = MLImage(sampleBuffer: sampleBuffer) else {
+        return nil
+      }
       
-//      let classificationResults: ClassificationResult = try imageClassifier.classify(
-//        mlImage: pixelBuffer)
-//      print(classificationResults.classifications[0].categories[0].label);
-//      print(classificationResults.classifications[0].categories[0].score);
+      let classificationResult = try imageClassifier.classify(
+        gmlImage: gmlImage)
+            
+      print("Top \(resultCount) Results")
       
-//        let detectionResult: DetectionResult? = try objectDetector?.detect(
-//                mlImage: pixelBuffer)
-//              print(detectionResult?.detections[0].categories[0].label);
-//              print(detectionResult?.detections[0].categories[0].score);
-//
-//      let segmentationResult: SegmentationResult? = try imageSegmenter?.segment(
-//        mlImage: pixelBuffer)
-//
-//      print("cat \(segmentationResult?.segmentations[0].categoryMask)");
-//      print("cat \(segmentationResult?.segmentations[0].categoryMask?.mask[0])");
-//
-//      print("conf \(segmentationResult?.segmentations[0].confidenceMasks)");
-//      print("conf \(segmentationResult?.segmentations[0].confidenceMasks?[0].mask[0])");
+      for (idx, category) in classificationResult.classifications[0].categories.enumerated() {
+        guard let label = category.label else {
+          return nil;
+        }
+        print("\(idx + 1): Label: \(label), Score: \(category.score)")
+      }
 
-//      let inputTensor = try interpreter.input(at: 0)
-//
-//      // Remove the alpha component from the image buffer to get the RGB data.
-//      guard let rgbData = rgbDataFromBuffer(
-//        thumbnailPixelBuffer,
-//        byteCount: batchSize * inputWidth * inputHeight * inputChannels,
-//        isModelQuantized: inputTensor.dataType == .uInt8
-//      ) else {
-//        print("Failed to convert the image buffer to RGB data.")
-//        return nil
-//      }
-//
-//      // Copy the RGB data to the input `Tensor`.
-//      try interpreter.copy(rgbData, toInputAt: 0)
-//
-//      // Run inference by invoking the `Interpreter`.
-//      let startDate = Date()
-//      try interpreter.invoke()
-//      interval = Date().timeIntervalSince(startDate) * 1000
-//
-//      // Get the output `Tensor` to process the inference results.
-//      outputTensor = try interpreter.output(at: 0)
     } catch let error {
       print("Failed to invoke the interpreter with error: \(error.localizedDescription)")
       return nil
     }
 
-//    let results: [Float]
-//    switch outputTensor.dataType {
-//    case .uInt8:
-//      guard let quantization = outputTensor.quantizationParameters else {
-//        print("No results returned because the quantization values for the output tensor are nil.")
-//        return nil
-//      }
-//      let quantizedResults = [UInt8](outputTensor.data)
-//      results = quantizedResults.map {
-//        quantization.scale * Float(Int($0) - quantization.zeroPoint)
-//      }
-//    case .float32:
-//      results = [Float32](unsafeData: outputTensor.data) ?? []
-//    default:
-//      print("Output tensor data type \(outputTensor.dataType) is unsupported for this example app.")
-//      return nil
-//    }
-//
-//    // Process the results.
-//    let topNInferences = getTopN(results: results)
-
-    // Return the inference time and inference results.
     return nil
   }
 
-  // MARK: - Private Methods
-
-  /// Returns the top N inference results sorted in descending order.
-  private func getTopN(results: [Float]) -> [Inference] {
-    // Create a zipped array of tuples [(labelIndex: Int, confidence: Float)].
-    let zippedResults = zip(labels.indices, results)
-
-    // Sort the zipped results by confidence value in descending order.
-    let sortedResults = zippedResults.sorted { $0.1 > $1.1 }.prefix(resultCount)
-
-    // Return the `Inference` results.
-    return sortedResults.map { result in Inference(confidence: result.1, label: labels[result.0]) }
-  }
-
-  /// Loads the labels from the labels file and stores them in the `labels` property.
-  private func loadLabels(fileInfo: FileInfo) {
-    let filename = fileInfo.name
-    let fileExtension = fileInfo.extension
-    guard let fileURL = Bundle.main.url(forResource: filename, withExtension: fileExtension) else {
-      fatalError("Labels file not found in bundle. Please add a labels file with name " +
-                   "\(filename).\(fileExtension) and try again.")
-    }
-    do {
-      let contents = try String(contentsOf: fileURL, encoding: .utf8)
-      labels = contents.components(separatedBy: .newlines)
-    } catch {
-      fatalError("Labels file named \(filename).\(fileExtension) cannot be read. Please add a " +
-                   "valid labels file and try again.")
-    }
-  }
-
-  /// Returns the RGB data representation of the given image buffer with the specified `byteCount`.
-  ///
-  /// - Parameters
-  ///   - buffer: The pixel buffer to convert to RGB data.
-  ///   - byteCount: The expected byte count for the RGB data calculated using the values that the
-  ///       model was trained on: `batchSize * imageWidth * imageHeight * componentsCount`.
-  ///   - isModelQuantized: Whether the model is quantized (i.e. fixed point values rather than
-  ///       floating point values).
-  /// - Returns: The RGB data representation of the image buffer or `nil` if the buffer could not be
-  ///     converted.
-  private func rgbDataFromBuffer(
-    _ buffer: CVPixelBuffer,
-    byteCount: Int,
-    isModelQuantized: Bool
-  ) -> Data? {
-    CVPixelBufferLockBaseAddress(buffer, .readOnly)
-    defer {
-      CVPixelBufferUnlockBaseAddress(buffer, .readOnly)
-    }
-    guard let sourceData = CVPixelBufferGetBaseAddress(buffer) else {
-      return nil
-    }
-    
-    let width = CVPixelBufferGetWidth(buffer)
-    let height = CVPixelBufferGetHeight(buffer)
-    let sourceBytesPerRow = CVPixelBufferGetBytesPerRow(buffer)
-    let destinationChannelCount = 3
-    let destinationBytesPerRow = destinationChannelCount * width
-    
-    var sourceBuffer = vImage_Buffer(data: sourceData,
-                                     height: vImagePixelCount(height),
-                                     width: vImagePixelCount(width),
-                                     rowBytes: sourceBytesPerRow)
-    
-    guard let destinationData = malloc(height * destinationBytesPerRow) else {
-      print("Error: out of memory")
-      return nil
-    }
-    
-    defer {
-        free(destinationData)
-    }
-
-    var destinationBuffer = vImage_Buffer(data: destinationData,
-                                          height: vImagePixelCount(height),
-                                          width: vImagePixelCount(width),
-                                          rowBytes: destinationBytesPerRow)
-
-    let pixelBufferFormat = CVPixelBufferGetPixelFormatType(buffer)
-
-    switch (pixelBufferFormat) {
-    case kCVPixelFormatType_32BGRA:
-        vImageConvert_BGRA8888toRGB888(&sourceBuffer, &destinationBuffer, UInt32(kvImageNoFlags))
-    case kCVPixelFormatType_32ARGB:
-        vImageConvert_ARGB8888toRGB888(&sourceBuffer, &destinationBuffer, UInt32(kvImageNoFlags))
-    case kCVPixelFormatType_32RGBA:
-        vImageConvert_RGBA8888toRGB888(&sourceBuffer, &destinationBuffer, UInt32(kvImageNoFlags))
-    default:
-        // Unknown pixel format.
-        return nil
-    }
-
-    let byteData = Data(bytes: destinationBuffer.data, count: destinationBuffer.rowBytes * height)
-    if isModelQuantized {
-        return byteData
-    }
-
-    // Not quantized, convert to floats
-    let bytes = Array<UInt8>(unsafeData: byteData)!
-    var floats = [Float]()
-    for i in 0..<bytes.count {
-        floats.append(Float(bytes[i]) / 255.0)
-    }
-    return Data(copyingBufferOf: floats)
-  }
-}
-
-// MARK: - Extensions
-
-extension Data {
-  /// Creates a new buffer by copying the buffer pointer of the given array.
-  ///
-  /// - Warning: The given array's element type `T` must be trivial in that it can be copied bit
-  ///     for bit with no indirection or reference-counting operations; otherwise, reinterpreting
-  ///     data from the resulting buffer has undefined behavior.
-  /// - Parameter array: An array with elements of type `T`.
-  init<T>(copyingBufferOf array: [T]) {
-    self = array.withUnsafeBufferPointer(Data.init)
-  }
-}
-
-extension Array {
-  /// Creates a new array from the bytes of the given unsafe data.
-  ///
-  /// - Warning: The array's `Element` type must be trivial in that it can be copied bit for bit
-  ///     with no indirection or reference-counting operations; otherwise, copying the raw bytes in
-  ///     the `unsafeData`'s buffer to a new array returns an unsafe copy.
-  /// - Note: Returns `nil` if `unsafeData.count` is not a multiple of
-  ///     `MemoryLayout<Element>.stride`.
-  /// - Parameter unsafeData: The data containing the bytes to turn into an array.
-  init?(unsafeData: Data) {
-    guard unsafeData.count % MemoryLayout<Element>.stride == 0 else { return nil }
-    #if swift(>=5.0)
-    self = unsafeData.withUnsafeBytes { .init($0.bindMemory(to: Element.self)) }
-    #else
-    self = unsafeData.withUnsafeBytes {
-      .init(UnsafeBufferPointer<Element>(
-        start: $0,
-        count: unsafeData.count / MemoryLayout<Element>.stride
-      ))
-    }
-    #endif  // swift(>=5.0)
-  }
 }

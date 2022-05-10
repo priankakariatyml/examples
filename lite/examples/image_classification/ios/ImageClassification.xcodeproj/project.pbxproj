@@ -10,12 +10,8 @@
 		AA16E5A22180843800D9E153 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16E5A12180843700D9E153 /* InfoCell.swift */; };
 		AA5B0EEA217E5E300026FF23 /* InferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */; };
 		AA5B0EEC217E70000026FF23 /* CurvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EEB217E70000026FF23 /* CurvedView.swift */; };
-		AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */; };
-		AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7C21355CCC00F9BD4B /* labels.txt */; };
 		AAAB096E218981FA0015A1F2 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */; };
 		AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */; };
-		AAADDF7F282848D5002DCED8 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAADDF7E282848D5002DCED8 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */; };
-		AAADDF81282848E3002DCED8 /* deeplabv3.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAADDF80282848E3002DCED8 /* deeplabv3.tflite */; };
 		AABFCBB2213FE0B100C0A67B /* ModelDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */; };
 		AAE79E5A213521DA00E7AC1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79E59213521DA00E7AC1F /* AppDelegate.swift */; };
 		AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE79E5D213521DA00E7AC1F /* Main.storyboard */; };
@@ -33,12 +29,8 @@
 		AA16E5A12180843700D9E153 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceViewController.swift; sourceTree = "<group>"; };
 		AA5B0EEB217E70000026FF23 /* CurvedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurvedView.swift; sourceTree = "<group>"; };
-		AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_quant_v1_224.tflite; sourceTree = "<group>"; };
-		AA5FEB7C21355CCC00F9BD4B /* labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
 		AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
 		AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_v2_1.0_224.tflite; sourceTree = "<group>"; };
-		AAADDF7E282848D5002DCED8 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite; sourceTree = "<group>"; };
-		AAADDF80282848E3002DCED8 /* deeplabv3.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = deeplabv3.tflite; sourceTree = "<group>"; };
 		AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDataHandler.swift; sourceTree = "<group>"; };
 		AAE79E56213521DA00E7AC1F /* ImageClassification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageClassification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE79E59213521DA00E7AC1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,11 +92,7 @@
 		AA5FEB7A21355CCC00F9BD4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AAADDF80282848E3002DCED8 /* deeplabv3.tflite */,
 				AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */,
-				AAADDF7E282848D5002DCED8 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */,
-				AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */,
-				AA5FEB7C21355CCC00F9BD4B /* labels.txt */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,7 +184,6 @@
 			buildConfigurationList = AAE79E7E213521DB00E7AC1F /* Build configuration list for PBXNativeTarget "ImageClassification" */;
 			buildPhases = (
 				0139AEC41FA0921D37A71365 /* [CP] Check Pods Manifest.lock */,
-				AA055D8B2162320A00B25948 /* ShellScript */,
 				AAE79E52213521DA00E7AC1F /* Sources */,
 				AAE79E53213521DA00E7AC1F /* Frameworks */,
 				AAE79E54213521DA00E7AC1F /* Resources */,
@@ -252,11 +239,7 @@
 				AAE79E64213521DB00E7AC1F /* LaunchScreen.storyboard in Resources */,
 				AAE79E61213521DB00E7AC1F /* Assets.xcassets in Resources */,
 				AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */,
-				AAADDF7F282848D5002DCED8 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */,
-				AAADDF81282848E3002DCED8 /* deeplabv3.tflite in Resources */,
-				AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */,
 				AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */,
-				AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,23 +267,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		AA055D8B2162320A00B25948 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$SRCROOT/RunScripts/download_models.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -465,8 +431,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R828ZATN6C;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -477,8 +443,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -492,8 +459,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R828ZATN6C;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -504,8 +471,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

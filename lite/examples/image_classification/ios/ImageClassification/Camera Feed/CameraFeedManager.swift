@@ -334,58 +334,6 @@ extension CameraFeedManager: AVCaptureVideoDataOutputSampleBufferDelegate {
  */
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 
-//    let bundle = Bundle.main
-//    guard let modelPath = bundle.path(
-//      forResource: "mobilenet_quant_v1_224",
-//      ofType: "tflite") {
-//        return
-//      }
-//    
-//    let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
-//    
-//    let maxResults = 3
-//    imageClassifierOptions.classificationOptions.maxResults = maxResults
-//    
-//    do {
-//    try ImageClassifier.imageClassifier(options: imageClassifierOptions)
-//    }
-//    catch {
-//      
-//    }
-//    
-//    do {
-//      try imageClassifier.classify(
-//        gmlImage: gmlImage)
-//    }
-//    catch {
-//      
-//    }
-//    
-    
-  
-
-    // Converts the CMSampleBuffer to a CVPixelBuffer.
-    
-    
-//    guard let imagePixelBuffer = pixelBuffer else {
-//      return
-//    }
-//
-//    CVPixelBufferLockBaseAddress(imagePixelBuffer, CVPixelBufferLockFlags.readOnly);
-//    let buffer =  CVPixelBufferGetBaseAddress(imagePixelBuffer);
-//    let eBuffer = buffer!.bindMemory(to: UInt8.self, capacity: CVPixelBufferGetWidth(imagePixelBuffer) * CVPixelBufferGetHeight(imagePixelBuffer) * 4)
-//
-//    for col in 0..<4 {
-//      for row in 0..<4 {
-//        let offset = 4 * (row * CVPixelBufferGetWidth(imagePixelBuffer) + col);
-//        print(eBuffer[offset]);
-//        print(eBuffer[offset + 1]);
-//        print(eBuffer[offset + 2]);
-//        print(eBuffer[offset + 3]);
-//      }
-//    }
-//    CVPixelBufferUnlockBaseAddress(imagePixelBuffer, CVPixelBufferLockFlags.readOnly);
-
     // Delegates the pixel buffer to the ViewController.
     delegate?.didOutput(sampleBuffer: sampleBuffer)
     
