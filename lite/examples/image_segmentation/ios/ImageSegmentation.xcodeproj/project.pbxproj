@@ -14,11 +14,10 @@
 		7F67812823405196002A02F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F67812723405196002A02F2 /* Assets.xcassets */; };
 		7F67812B23405196002A02F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F67812923405196002A02F2 /* LaunchScreen.storyboard */; };
 		7F9738DD234071180058C202 /* ImageSegmentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9738DC234071180058C202 /* ImageSegmentator.swift */; };
-		7F9738DF234072CE0058C202 /* deeplabv3_labels.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F9738DE234072CE0058C202 /* deeplabv3_labels.json */; };
 		7F9738E22341EFDD0058C202 /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9738E12341EFDD0058C202 /* TFLiteExtension.swift */; };
-		7F9738E323422B200058C202 /* deeplabv3_257_mv_gpu.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 7F9738E02340733F0058C202 /* deeplabv3_257_mv_gpu.tflite */; };
 		7F9738E72343CE9F0058C202 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9738E62343CE9F0058C202 /* UIKitExtension.swift */; };
 		7FA4B36F2345BC73005784A9 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4B36E2345BC73005784A9 /* boy.jpg */; };
+		AABDCE0E282A9D7C00B189D0 /* deeplabv3.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AABDCE0D282A9D7C00B189D0 /* deeplabv3.tflite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +29,11 @@
 		7F67812A23405196002A02F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F67812C23405196002A02F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F9738DC234071180058C202 /* ImageSegmentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSegmentator.swift; sourceTree = "<group>"; };
-		7F9738DE234072CE0058C202 /* deeplabv3_labels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deeplabv3_labels.json; sourceTree = "<group>"; };
-		7F9738E02340733F0058C202 /* deeplabv3_257_mv_gpu.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = deeplabv3_257_mv_gpu.tflite; sourceTree = "<group>"; };
 		7F9738E12341EFDD0058C202 /* TFLiteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
 		7F9738E62343CE9F0058C202 /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		7FA4B36E2345BC73005784A9 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = boy.jpg; sourceTree = "<group>"; };
 		8857CE6BF260FD2EBF0CDB36 /* Pods-ImageSegmentation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSegmentation.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImageSegmentation/Pods-ImageSegmentation.release.xcconfig"; sourceTree = "<group>"; };
+		AABDCE0D282A9D7C00B189D0 /* deeplabv3.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = deeplabv3.tflite; sourceTree = "<group>"; };
 		AFA20F57D312CC344EAF47D5 /* Pods-ImageSegmentation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSegmentation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImageSegmentation/Pods-ImageSegmentation.debug.xcconfig"; sourceTree = "<group>"; };
 		D23CF8BF5D33ABF1A65D8568 /* Pods_ImageSegmentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageSegmentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -108,8 +106,7 @@
 		7F9738E823448E750058C202 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				7F9738DE234072CE0058C202 /* deeplabv3_labels.json */,
-				7F9738E02340733F0058C202 /* deeplabv3_257_mv_gpu.tflite */,
+				AABDCE0D282A9D7C00B189D0 /* deeplabv3.tflite */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -122,7 +119,6 @@
 			buildConfigurationList = 7F67812F23405196002A02F2 /* Build configuration list for PBXNativeTarget "ImageSegmentation" */;
 			buildPhases = (
 				9C4626EB48450F23C89E4443 /* [CP] Check Pods Manifest.lock */,
-				7FA4B3692345B949005784A9 /* Download TensorFlow Lite model */,
 				7F67811723405195002A02F2 /* Sources */,
 				7F67811823405195002A02F2 /* Frameworks */,
 				7F67811923405195002A02F2 /* Resources */,
@@ -174,11 +170,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABDCE0E282A9D7C00B189D0 /* deeplabv3.tflite in Resources */,
 				7FA4B36F2345BC73005784A9 /* boy.jpg in Resources */,
 				7F67812B23405196002A02F2 /* LaunchScreen.storyboard in Resources */,
 				7F67812823405196002A02F2 /* Assets.xcassets in Resources */,
-				7F9738DF234072CE0058C202 /* deeplabv3_labels.json in Resources */,
-				7F9738E323422B200058C202 /* deeplabv3_257_mv_gpu.tflite in Resources */,
 				7F67812623405195002A02F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,24 +181,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7FA4B3692345B949005784A9 /* Download TensorFlow Lite model */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Download TensorFlow Lite model";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Download TF Lite model from the internet if it's not exist.\nTFLITE_FILE=${SRCROOT}/ImageSegmentation/model/deeplabv3_257_mv_gpu.tflite\nif test -f \"$TFLITE_FILE\"; then\n    echo \"INFO: TF Lite model already existed. Skip downloading and use the local model.\"\nelse\n    curl -o ${TFLITE_FILE} https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite\n    echo \"INFO: Downloaded TensorFlow Lite model to $TFLITE_FILE .\"\nfi\n";
-		};
 		9C4626EB48450F23C89E4443 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
