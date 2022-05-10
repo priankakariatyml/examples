@@ -6,6 +6,6 @@ target 'ObjectDetection' do
   use_frameworks!
 
   # Pods for ObjectDetection
-  pod 'TensorFlowLiteTaskVision', '~>0.0.1-nightly.20220508'
+  pod 'TensorFlowLiteTaskVision'
 
 end

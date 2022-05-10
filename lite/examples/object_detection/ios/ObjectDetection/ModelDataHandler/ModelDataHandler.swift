@@ -94,6 +94,7 @@ class ModelDataHandler: NSObject {
     self.threadCount = threadCount
     let options = ObjectDetectorOptions(modelPath: modelPath)
     options.baseOptions.computeSettings.cpuSettings.numThreads = Int32(threadCount)
+    options.classificationOptions.maxResults = 3
     
     do {
       // Create the `Interpreter`.
@@ -119,12 +120,14 @@ class ModelDataHandler: NSObject {
       }
       let objectDetectionResult = try objectDetector.detect(gmlImage: gmlImage)
       
-      let category = objectDetectionResult.detections[0].categories[0]
-      
-      guard let label = category.label else {
-        return nil;
+      print("Top 3 Objects Detected")
+
+      for (idx, detection) in objectDetectionResult.detections.enumerated() {
+        guard let label = detection.categories[0].label else {
+          return nil;
+        }
+        print("\(idx + 1): Label: \(label), Score: \(detection.categories[0].score) Bbox: \(detection.boundingBox)")
       }
-      print("Label: \(label), Score: \(category.score)")
       
     } catch let error {
       print("Failed to invoke the interpreter with error: \(error.localizedDescription)")
