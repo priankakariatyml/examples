@@ -65,7 +65,7 @@ class ModelDataHandler {
   private var labels: [String] = []
 
   /// TensorFlow Lite `Interpreter` object for performing inference on a given model.
-  private var imageClassifier: ImageClassifier
+//  private var imageClassifier: ImageClassifier
   
   private var objectDetector: ObjectDetector?
   
@@ -92,37 +92,77 @@ class ModelDataHandler {
       return nil
     }
 
+    var imageClassifier: ImageClassifier
+
+    guard let modelPath = Bundle.main.path(forResource: "your_model_file_name",
+                                           ofType: "tflite") else {
+      return
+    }
+
+    let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+    do {
+      imageClassifier = try ImageClassifier.imageClassifier(options: imageClassifierOptions)
+      guard let image = UIImage (named: "your_input_image_name"), let mlImage = MLImage(image: image) else {
+        return
+      }
+      do {
+        let classificationResults: ClassificationResult = try imageClassifier.classify(gmlImage: mlImage)
+      }
+      catch {
+        // Handle failure.
+      }
+    }
+    catch {
+      // Handle failure. Check error.localizedDescription to understand the reason for failure.
+    }
+
+    // Run inference
+    // There are other sources for MLImage. For more details, please see:
+    // https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+    
+
     // Specify the options for the `Interpreter`.
 //    self.threadCount = threadCount
 //    var options = InterpreterOptions()
 //    options.threadCount = threadCount
-    do {
-      // Create the `Interpreter`.
-      let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+//    var imageClassPrivate: ImageClassifier
 
-      let maxResults = 3
-      imageClassifierOptions.classificationOptions.maxResults = maxResults
-
-      imageClassifier = try ImageClassifier.classifier(options: imageClassifierOptions)
-     
-      let objectPath = Bundle.main.path(forResource: "coco_ssd_mobilenet_v1_1.0_quant_2018_06_29", ofType: "tflite")!
-      let objectDetectorOptions = ObjectDetectorOptions(modelPath: objectPath)
-      
-      objectDetectorOptions.classificationOptions.maxResults = maxResults
-      
-      objectDetector = try ObjectDetector.detector(options: objectDetectorOptions)
-      
-      let segmentPath = Bundle.main.path(forResource: "deeplabv3", ofType: "tflite")!
-      let imageSegmenterOptions = ImageSegmenterOptions(modelPath: segmentPath)
-//      imageSegmenterOptions.outputType = OutputType.cate
-      
-      imageSegmenter = try ImageSegmenter.segmenter(options: imageSegmenterOptions)
-s
-      
-    } catch let error {
-      print("Failed to create the interpreter with error: \(error.localizedDescription)")
-      return nil
-    }
+//    do {
+//      // Create the `Interpreter`.
+//      let imageClassifierOptions = ImageClassifierOptions(modelPath: modelPath)
+////
+////      let maxResults = 3
+////      imageClassifierOptions.classificationOptions.maxResults = maxResults
+////
+////      imageClassifier = try ImageClassifier.classifier(options: imageClassifierOptions)
+////
+////      let objectPath = Bundle.main.path(forResource: "coco_ssd_mobilenet_v1_1.0_quant_2018_06_29", ofType: "tflite")!
+////      let objectDetectorOptions = ObjectDetectorOptions(modelPath: objectPath)
+////
+////      objectDetectorOptions.classificationOptions.maxResults = maxResults
+////
+////      objectDetector = try ObjectDetector.detector(options: objectDetectorOptions)
+////
+////      let segmentPath = Bundle.main.path(forResource: "deeplabv3", ofType: "tflite")!
+////      let imageSegmenterOptions = ImageSegmenterOptions(modelPath: segmentPath)
+//////      imageSegmenterOptions.outputType = OutputType.cate
+////
+////      imageSegmenter = try ImageSegmenter.segmenter(options: imageSegmenterOptions)
+////
+//      imageClassPrivate  = try ImageClassifier.classifier(options: imageClassifierOptions)
+//
+//    } catch let error {
+//      print("Failed to create the interpreter with error: \(error.localizedDescription)")
+//      return nil
+//    }
+//
+//    guard let image = UIImage (named: ""), let mlImage = MLImage(image: image) else {
+//      return
+//    }
+//
+//    UIImage(named: "")
+//
+//   try! imageClassPrivate.classify(mlImage: mlImage)
     // Load the classes listed in the labels file.
 //    loadLabels(fileInfo: labelsFileInfo)
   }
@@ -159,14 +199,14 @@ s
 //              print(detectionResult?.detections[0].categories[0].label);
 //              print(detectionResult?.detections[0].categories[0].score);
 //
-      let segmentationResult: SegmentationResult? = try imageSegmenter?.segment(
-        mlImage: pixelBuffer)
-      
-      print("cat \(segmentationResult?.segmentations[0].categoryMask)");
-      print("cat \(segmentationResult?.segmentations[0].categoryMask?.mask[0])");
-      
-      print("conf \(segmentationResult?.segmentations[0].confidenceMasks)");
-      print("conf \(segmentationResult?.segmentations[0].confidenceMasks?[0].mask[0])");
+//      let segmentationResult: SegmentationResult? = try imageSegmenter?.segment(
+//        mlImage: pixelBuffer)
+//
+//      print("cat \(segmentationResult?.segmentations[0].categoryMask)");
+//      print("cat \(segmentationResult?.segmentations[0].categoryMask?.mask[0])");
+//
+//      print("conf \(segmentationResult?.segmentations[0].confidenceMasks)");
+//      print("conf \(segmentationResult?.segmentations[0].confidenceMasks?[0].mask[0])");
 
 //      let inputTensor = try interpreter.input(at: 0)
 //
