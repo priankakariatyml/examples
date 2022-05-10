@@ -20,7 +20,7 @@
 		AA9AC5D7212D43E0000B4E9D /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9AC5D5212D43E0000B4E9D /* PreviewView.swift */; };
 		AA9AC5E2212D4520000B4E9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9AC5E1212D4520000B4E9D /* ViewController.swift */; };
 		AAAB09702189838A0015A1F2 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB096F2189838A0015A1F2 /* CVPixelBufferExtension.swift */; };
-		AABDCE0A282A4CFA00B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AABDCE09282A4CFA00B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */; };
+		AABDCE0C282A51D100B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AABDCE0B282A51D100B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */; };
 		AAC58495214797E800FB532F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58494214797E800FB532F /* StringExtension.swift */; };
 		AAEF3D8D21A2BE2B0073AE1C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF3D8C21A2BE2B0073AE1C /* UIColorExtension.swift */; };
 		CD44CEDB55F84A566EEB7818 /* Pods_ObjectDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9234BCF6F367B9099394170 /* Pods_ObjectDetection.framework */; };
@@ -45,7 +45,7 @@
 		AA9AC5D5212D43E0000B4E9D /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		AA9AC5E1212D4520000B4E9D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AAAB096F2189838A0015A1F2 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
-		AABDCE09282A4CFA00B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite; sourceTree = "<group>"; };
+		AABDCE0B282A51D100B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite; sourceTree = "<group>"; };
 		AAC58494214797E800FB532F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		AAEF3D8C21A2BE2B0073AE1C /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +65,7 @@
 		AA09263B212D730700D5890F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AABDCE09282A4CFA00B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */,
+				AABDCE0B282A51D100B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,7 +240,7 @@
 				AA9AC5A9212D39FD000B4E9D /* LaunchScreen.storyboard in Resources */,
 				AA9AC5A6212D39FD000B4E9D /* Assets.xcassets in Resources */,
 				AA9AC5A4212D39FC000B4E9D /* Main.storyboard in Resources */,
-				AABDCE0A282A4CFA00B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */,
+				AABDCE0C282A51D100B189D0 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
