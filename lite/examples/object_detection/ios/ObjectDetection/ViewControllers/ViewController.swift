@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import UIKit
+import CoreMedia
 
 class ViewController: UIViewController {
 
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
   // MARK: Controllers that manage functionality
   private lazy var cameraFeedManager = CameraFeedManager(previewView: previewView)
   private var modelDataHandler: ModelDataHandler? =
-    ModelDataHandler(modelFileInfo: MobileNetSSD.modelInfo, labelsFileInfo: MobileNetSSD.labelsInfo)
+    ModelDataHandler(modelFileInfo: MobileNetSSD.modelInfo)
   private var inferenceViewController: InferenceViewController?
 
   // MARK: View Handling Methods
@@ -140,7 +141,6 @@ extension ViewController: InferenceViewControllerDelegate {
     if modelDataHandler?.threadCount == count { return }
     modelDataHandler = ModelDataHandler(
       modelFileInfo: MobileNetSSD.modelInfo,
-      labelsFileInfo: MobileNetSSD.labelsInfo,
       threadCount: count
     )
   }
@@ -150,8 +150,8 @@ extension ViewController: InferenceViewControllerDelegate {
 // MARK: CameraFeedManagerDelegate Methods
 extension ViewController: CameraFeedManagerDelegate {
 
-  func didOutput(pixelBuffer: CVPixelBuffer) {
-    runModel(onPixelBuffer: pixelBuffer)
+  func didOutput(sampleBuffer: CMSampleBuffer) {
+    runModel(on: sampleBuffer)
   }
 
   // MARK: Session Handling Alerts
@@ -212,7 +212,7 @@ extension ViewController: CameraFeedManagerDelegate {
 
   /** This method runs the live camera pixelBuffer through tensorFlow to get the result.
    */
-  @objc  func runModel(onPixelBuffer pixelBuffer: CVPixelBuffer) {
+  @objc  func runModel(on sampleBuffer: CMSampleBuffer) {
 
     // Run the live camera pixelBuffer through tensorFlow to get the result
 
@@ -223,7 +223,11 @@ extension ViewController: CameraFeedManagerDelegate {
     }
 
     previousInferenceTimeMs = currentTimeMs
-    result = self.modelDataHandler?.runModel(onFrame: pixelBuffer)
+    result = self.modelDataHandler?.runModel(on: sampleBuffer)
+    
+    guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+          return
+    }
 
     guard let displayResult = result else {
       return
