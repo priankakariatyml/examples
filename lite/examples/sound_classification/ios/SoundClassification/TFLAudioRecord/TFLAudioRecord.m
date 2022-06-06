@@ -64,9 +64,22 @@
 
 
 - (void)startTappingMicrophoneWithError:(NSError **)error {
+  
+  
   AVAudioNode *inputNode = [_audioEngine inputNode];
   AVAudioFormat *format = [inputNode outputFormatForBus:0];
-
+//
+//  NSURL *fileURL = [[NSBundle bundleForClass:self.class] URLForResource:@"speech" withExtension:@"wav"];
+//  AVAudioFile *audioFile = [[AVAudioFile alloc] initForReading:fileURL error:nil];
+//  AVAudioPCMBuffer *buffer = [[AVAudioPCMBuffer alloc]
+//                              initWithPCMFormat:audioFile.processingFormat
+//                              frameCapacity:(AVAudioFrameCount)audioFile.length];
+//  [audioFile readIntoBuffer:buffer error:nil];
+//  AudioBufferList *list;
+//  [[AVAudioPCMBuffer alloc] initWithPCMFormat:format bufferListNoCopy:list deallocator:^(const AudioBufferList * _Nonnull) {
+//
+//  }];
+//
   AVAudioFormat *recordingFormat =
       [[AVAudioFormat alloc] initWithCommonFormat:AVAudioPCMFormatFloat32
                                        sampleRate:self.audioFormat.sampleRate
@@ -83,7 +96,7 @@
            bufferSize:(AVAudioFrameCount)self.bufferSize
                format:format
                 block:^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
-                  dispatch_async(self->_conversionQueue, ^{
+                  dispatch_sync(self->_conversionQueue, ^{
                     // Capacity of converted PCM buffer is calculated in order to maintain the same
                     // latency as the input pcmBuffer.
                     AVAudioFrameCount capacity =

@@ -20,6 +20,7 @@ class ViewController: UIViewController {
 
   private var soundClassifier: SoundClassifier!
   private var categories: [ClassificationCategory] = []
+  private var name: String = "Empty"
 
   // MARK: - View controller lifecycle methods
 
@@ -68,14 +69,19 @@ extension ViewController: SoundClassifierDelegate {
     guard let label = categories[0].label else {
       return
     }
+    
     print("Label: \(label), Score: \(categories[0].score)");
+    name = label;
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
 }
 
 // MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return categories.count
+    return 1
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,10 +90,10 @@ extension ViewController: UITableViewDataSource {
       for: indexPath
     ) as? ProbabilityTableViewCell else { return UITableViewCell() }
 
-//    cell.label.text = soundClassifier.labelNames[indexPath.row]
-    UIView.animate(withDuration: 0.4) {
-      cell.progressView.setProgress(self.categories[indexPath.row].score, animated: true)
-    }
+    cell.label.text = name;
+//    UIView.animate(withDuration: 0.4) {
+//      cell.progressView.setProgress(self.categories[indexPath.row].score, animated: true)
+//    }
     return cell
   }
 }
