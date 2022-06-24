@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA3CB36E281D805200A51A6A /* TFLAudioTensor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB349281D805200A51A6A /* TFLAudioTensor.m */; };
-		AA3CB370281D805200A51A6A /* TFLAudioFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB34B281D805200A51A6A /* TFLAudioFormat.m */; };
-		AA3CB371281D805200A51A6A /* TFLRingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB34C281D805200A51A6A /* TFLRingBuffer.m */; };
-		AA3CB372281D805200A51A6A /* TFLFloatBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB352281D805200A51A6A /* TFLFloatBuffer.m */; };
-		AA3CB373281D805200A51A6A /* TFLBaseOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB358281D805200A51A6A /* TFLBaseOptions.m */; };
-		AA3CB374281D805200A51A6A /* TFLBaseOptions+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB35B281D805200A51A6A /* TFLBaseOptions+Helpers.m */; };
-		AA3CB375281D805200A51A6A /* TFLClassificationOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB35F281D805200A51A6A /* TFLClassificationOptions.m */; };
-		AA3CB376281D805200A51A6A /* TFLClassificationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB360281D805200A51A6A /* TFLClassificationResult.m */; };
-		AA3CB377281D805200A51A6A /* TFLClassificationResult+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB362281D805200A51A6A /* TFLClassificationResult+Helpers.m */; };
-		AA3CB378281D805200A51A6A /* TFLClassificationOptions+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB365281D805200A51A6A /* TFLClassificationOptions+Helpers.m */; };
-		AA3CB379281D805200A51A6A /* TFLCategory+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB367281D805200A51A6A /* TFLCategory+Helpers.m */; };
-		AA3CB37A281D805200A51A6A /* TFLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB369281D805200A51A6A /* TFLCategory.m */; };
-		AA3CB37B281D805200A51A6A /* TFLAudioClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB36A281D805200A51A6A /* TFLAudioClassifier.m */; };
-		AA3CB37C281D805200A51A6A /* TFLAudioTensor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB36B281D805200A51A6A /* TFLAudioTensor+Utils.m */; };
-		AA3CB37D281D805200A51A6A /* TFLCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CB36C281D805200A51A6A /* TFLCommonUtils.m */; };
 		AA3CB381281D80ED00A51A6A /* yamnet_audio_classifier_with_metadata.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA3CB380281D80ED00A51A6A /* yamnet_audio_classifier_with_metadata.tflite */; };
 		AA86A4C12840BD2F00649928 /* yamnet_audio_classifier_with_metadata.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA86A4C02840BD2F00649928 /* yamnet_audio_classifier_with_metadata.tflite */; };
 		AA86A4C32840E82900649928 /* speech.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA86A4C22840E82900649928 /* speech.wav */; };
-		AA8E503D28141C4400883004 /* TFLAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8E503C28141C4400883004 /* TFLAudioRecord.m */; };
 		AAA0292F281ED48B0077BB51 /* SampleObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA0292E281ED48B0077BB51 /* SampleObjc.m */; };
 		AACEFE8A28659FD900D60017 /* TensorFlowLiteTaskAudioC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACEFE8928659FD900D60017 /* TensorFlowLiteTaskAudioC.framework */; platformFilter = ios; };
+		AACEFECF2865A4A400D60017 /* TFLAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEB62865A4A400D60017 /* TFLAudioRecord.m */; };
+		AACEFED12865A4A400D60017 /* TFLAudioFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEBA2865A4A400D60017 /* TFLAudioFormat.m */; };
+		AACEFED22865A4A400D60017 /* TFLRingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEBB2865A4A400D60017 /* TFLRingBuffer.m */; };
+		AACEFED32865A4A400D60017 /* TFLFloatBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEBF2865A4A400D60017 /* TFLFloatBuffer.m */; };
+		AACEFED42865A4A400D60017 /* TFLAudioTensor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEC42865A4A400D60017 /* TFLAudioTensor+Utils.m */; };
+		AACEFED62865A4A400D60017 /* TFLAudioTensor.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEC72865A4A400D60017 /* TFLAudioTensor.m */; };
+		AACEFED92865A4A400D60017 /* TFLAudioClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFECD2865A4A400D60017 /* TFLAudioClassifier.m */; };
+		AACEFEF92865A4B100D60017 /* TFLBaseOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEDD2865A4B100D60017 /* TFLBaseOptions.m */; };
+		AACEFEFA2865A4B100D60017 /* TFLBaseOptions+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEE02865A4B100D60017 /* TFLBaseOptions+Helpers.m */; };
+		AACEFEFC2865A4B100D60017 /* TFLClassificationOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEE72865A4B100D60017 /* TFLClassificationOptions.m */; };
+		AACEFEFD2865A4B100D60017 /* TFLClassificationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEE82865A4B100D60017 /* TFLClassificationResult.m */; };
+		AACEFEFE2865A4B100D60017 /* TFLClassificationResult+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEEA2865A4B100D60017 /* TFLClassificationResult+Helpers.m */; };
+		AACEFF032865A4B100D60017 /* TFLClassificationOptions+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEF12865A4B100D60017 /* TFLClassificationOptions+Helpers.m */; };
+		AACEFF042865A4B100D60017 /* TFLCategory+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEF42865A4B100D60017 /* TFLCategory+Helpers.m */; };
+		AACEFF052865A4B100D60017 /* TFLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFEF72865A4B100D60017 /* TFLCategory.m */; };
+		AACEFF0B2865A68500D60017 /* TFLCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AACEFF092865A68500D60017 /* TFLCommonUtils.m */; };
+		AACEFF0D2865A71500D60017 /* SoundClassifier.swift .swift in Sources */ = {isa = PBXBuildFile; fileRef = AACEFF0C2865A71500D60017 /* SoundClassifier.swift .swift */; };
 		C83580DC253929A7007E9603 /* labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = C83580DA253929A7007E9603 /* labels.txt */; };
 		C83580DD253929A7007E9603 /* sound_classification.tflite in Resources */ = {isa = PBXBuildFile; fileRef = C83580DB253929A7007E9603 /* sound_classification.tflite */; };
 		C83B9C82256BB4C000EA2282 /* AudioInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B9C81256BB4C000EA2282 /* AudioInputManager.swift */; };
-		C83B9C8D256D38DB00EA2282 /* SoundClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B9C8C256D38DB00EA2282 /* SoundClassifier.swift */; };
 		C86E5C9F2525DB8400F53BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E5C9E2525DB8400F53BEA /* AppDelegate.swift */; };
 		C86E5CA32525DB8400F53BEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E5CA22525DB8400F53BEA /* ViewController.swift */; };
 		C86E5CA62525DB8400F53BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E5CA42525DB8400F53BEA /* Main.storyboard */; };
@@ -59,49 +59,49 @@
 
 /* Begin PBXFileReference section */
 		AA2587C0280EF9D30056CC58 /* SoundClassification-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundClassification-Bridging-Header.h"; sourceTree = "<group>"; };
-		AA3CB349281D805200A51A6A /* TFLAudioTensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioTensor.m; sourceTree = "<group>"; };
-		AA3CB34B281D805200A51A6A /* TFLAudioFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioFormat.m; sourceTree = "<group>"; };
-		AA3CB34C281D805200A51A6A /* TFLRingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLRingBuffer.m; sourceTree = "<group>"; };
-		AA3CB34D281D805200A51A6A /* TFLFloatBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLFloatBuffer.h; sourceTree = "<group>"; };
-		AA3CB34F281D805200A51A6A /* TFLAudioTensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioTensor.h; sourceTree = "<group>"; };
-		AA3CB350281D805200A51A6A /* TFLRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLRingBuffer.h; sourceTree = "<group>"; };
-		AA3CB351281D805200A51A6A /* TFLAudioFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioFormat.h; sourceTree = "<group>"; };
-		AA3CB352281D805200A51A6A /* TFLFloatBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLFloatBuffer.m; sourceTree = "<group>"; };
-		AA3CB355281D805200A51A6A /* TFLAudioTensor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLAudioTensor+Utils.h"; sourceTree = "<group>"; };
-		AA3CB356281D805200A51A6A /* TFLAudioClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioClassifier.h; sourceTree = "<group>"; };
-		AA3CB358281D805200A51A6A /* TFLBaseOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLBaseOptions.m; sourceTree = "<group>"; };
-		AA3CB359281D805200A51A6A /* TFLBaseOptions+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLBaseOptions+Helpers.h"; sourceTree = "<group>"; };
-		AA3CB35A281D805200A51A6A /* TFLBaseOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLBaseOptions.h; sourceTree = "<group>"; };
-		AA3CB35B281D805200A51A6A /* TFLBaseOptions+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLBaseOptions+Helpers.m"; sourceTree = "<group>"; };
-		AA3CB35C281D805200A51A6A /* TFLCommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommonUtils.h; sourceTree = "<group>"; };
-		AA3CB35E281D805200A51A6A /* TFLClassificationOptions+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLClassificationOptions+Helpers.h"; sourceTree = "<group>"; };
-		AA3CB35F281D805200A51A6A /* TFLClassificationOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLClassificationOptions.m; sourceTree = "<group>"; };
-		AA3CB360281D805200A51A6A /* TFLClassificationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLClassificationResult.m; sourceTree = "<group>"; };
-		AA3CB361281D805200A51A6A /* TFLCategory+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLCategory+Helpers.h"; sourceTree = "<group>"; };
-		AA3CB362281D805200A51A6A /* TFLClassificationResult+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLClassificationResult+Helpers.m"; sourceTree = "<group>"; };
-		AA3CB363281D805200A51A6A /* TFLCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCategory.h; sourceTree = "<group>"; };
-		AA3CB364281D805200A51A6A /* TFLClassificationOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLClassificationOptions.h; sourceTree = "<group>"; };
-		AA3CB365281D805200A51A6A /* TFLClassificationOptions+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLClassificationOptions+Helpers.m"; sourceTree = "<group>"; };
-		AA3CB366281D805200A51A6A /* TFLClassificationResult+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLClassificationResult+Helpers.h"; sourceTree = "<group>"; };
-		AA3CB367281D805200A51A6A /* TFLCategory+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLCategory+Helpers.m"; sourceTree = "<group>"; };
-		AA3CB368281D805200A51A6A /* TFLClassificationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLClassificationResult.h; sourceTree = "<group>"; };
-		AA3CB369281D805200A51A6A /* TFLCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLCategory.m; sourceTree = "<group>"; };
-		AA3CB36A281D805200A51A6A /* TFLAudioClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioClassifier.m; sourceTree = "<group>"; };
-		AA3CB36B281D805200A51A6A /* TFLAudioTensor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLAudioTensor+Utils.m"; sourceTree = "<group>"; };
-		AA3CB36C281D805200A51A6A /* TFLCommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLCommonUtils.m; sourceTree = "<group>"; };
-		AA3CB36D281D805200A51A6A /* TFLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommon.h; sourceTree = "<group>"; };
 		AA3CB380281D80ED00A51A6A /* yamnet_audio_classifier_with_metadata.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = yamnet_audio_classifier_with_metadata.tflite; sourceTree = "<group>"; };
 		AA86A4C02840BD2F00649928 /* yamnet_audio_classifier_with_metadata.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = yamnet_audio_classifier_with_metadata.tflite; sourceTree = "<group>"; };
 		AA86A4C22840E82900649928 /* speech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = speech.wav; sourceTree = "<group>"; };
-		AA8E503B28141C4300883004 /* TFLAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioRecord.h; sourceTree = "<group>"; };
-		AA8E503C28141C4400883004 /* TFLAudioRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioRecord.m; sourceTree = "<group>"; };
 		AAA0292D281ED48B0077BB51 /* SampleObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SampleObjc.h; path = SoundClassification/changed/SampleObjc.h; sourceTree = "<group>"; };
 		AAA0292E281ED48B0077BB51 /* SampleObjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SampleObjc.m; path = SoundClassification/changed/SampleObjc.m; sourceTree = "<group>"; };
 		AACEFE8928659FD900D60017 /* TensorFlowLiteTaskAudioC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TensorFlowLiteTaskAudioC.framework; sourceTree = "<group>"; };
+		AACEFEB52865A4A400D60017 /* TFLAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioRecord.h; sourceTree = "<group>"; };
+		AACEFEB62865A4A400D60017 /* TFLAudioRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioRecord.m; sourceTree = "<group>"; };
+		AACEFEBA2865A4A400D60017 /* TFLAudioFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioFormat.m; sourceTree = "<group>"; };
+		AACEFEBB2865A4A400D60017 /* TFLRingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLRingBuffer.m; sourceTree = "<group>"; };
+		AACEFEBC2865A4A400D60017 /* TFLFloatBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLFloatBuffer.h; sourceTree = "<group>"; };
+		AACEFEBD2865A4A400D60017 /* TFLRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLRingBuffer.h; sourceTree = "<group>"; };
+		AACEFEBE2865A4A400D60017 /* TFLAudioFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioFormat.h; sourceTree = "<group>"; };
+		AACEFEBF2865A4A400D60017 /* TFLFloatBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLFloatBuffer.m; sourceTree = "<group>"; };
+		AACEFEC32865A4A400D60017 /* TFLAudioTensor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLAudioTensor+Utils.h"; sourceTree = "<group>"; };
+		AACEFEC42865A4A400D60017 /* TFLAudioTensor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLAudioTensor+Utils.m"; sourceTree = "<group>"; };
+		AACEFEC72865A4A400D60017 /* TFLAudioTensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioTensor.m; sourceTree = "<group>"; };
+		AACEFEC82865A4A400D60017 /* TFLAudioTensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioTensor.h; sourceTree = "<group>"; };
+		AACEFECC2865A4A400D60017 /* TFLAudioClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLAudioClassifier.h; sourceTree = "<group>"; };
+		AACEFECD2865A4A400D60017 /* TFLAudioClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLAudioClassifier.m; sourceTree = "<group>"; };
+		AACEFEDD2865A4B100D60017 /* TFLBaseOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLBaseOptions.m; sourceTree = "<group>"; };
+		AACEFEDE2865A4B100D60017 /* TFLBaseOptions+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLBaseOptions+Helpers.h"; sourceTree = "<group>"; };
+		AACEFEDF2865A4B100D60017 /* TFLBaseOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLBaseOptions.h; sourceTree = "<group>"; };
+		AACEFEE02865A4B100D60017 /* TFLBaseOptions+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLBaseOptions+Helpers.m"; sourceTree = "<group>"; };
+		AACEFEE52865A4B100D60017 /* TFLClassificationOptions+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLClassificationOptions+Helpers.h"; sourceTree = "<group>"; };
+		AACEFEE72865A4B100D60017 /* TFLClassificationOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLClassificationOptions.m; sourceTree = "<group>"; };
+		AACEFEE82865A4B100D60017 /* TFLClassificationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLClassificationResult.m; sourceTree = "<group>"; };
+		AACEFEE92865A4B100D60017 /* TFLCategory+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLCategory+Helpers.h"; sourceTree = "<group>"; };
+		AACEFEEA2865A4B100D60017 /* TFLClassificationResult+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLClassificationResult+Helpers.m"; sourceTree = "<group>"; };
+		AACEFEEC2865A4B100D60017 /* TFLCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCategory.h; sourceTree = "<group>"; };
+		AACEFEEF2865A4B100D60017 /* TFLClassificationOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLClassificationOptions.h; sourceTree = "<group>"; };
+		AACEFEF12865A4B100D60017 /* TFLClassificationOptions+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLClassificationOptions+Helpers.m"; sourceTree = "<group>"; };
+		AACEFEF32865A4B100D60017 /* TFLClassificationResult+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLClassificationResult+Helpers.h"; sourceTree = "<group>"; };
+		AACEFEF42865A4B100D60017 /* TFLCategory+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLCategory+Helpers.m"; sourceTree = "<group>"; };
+		AACEFEF52865A4B100D60017 /* TFLClassificationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLClassificationResult.h; sourceTree = "<group>"; };
+		AACEFEF72865A4B100D60017 /* TFLCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLCategory.m; sourceTree = "<group>"; };
+		AACEFF082865A68500D60017 /* TFLCommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommonUtils.h; sourceTree = "<group>"; };
+		AACEFF092865A68500D60017 /* TFLCommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLCommonUtils.m; sourceTree = "<group>"; };
+		AACEFF0A2865A68500D60017 /* TFLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommon.h; sourceTree = "<group>"; };
+		AACEFF0C2865A71500D60017 /* SoundClassifier.swift .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoundClassifier.swift .swift"; sourceTree = "<group>"; };
 		C83580DA253929A7007E9603 /* labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
 		C83580DB253929A7007E9603 /* sound_classification.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound_classification.tflite; sourceTree = "<group>"; };
 		C83B9C81256BB4C000EA2282 /* AudioInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInputManager.swift; sourceTree = "<group>"; };
-		C83B9C8C256D38DB00EA2282 /* SoundClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundClassifier.swift; sourceTree = "<group>"; };
 		C86E5C9B2525DB8400F53BEA /* SoundClassification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundClassification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E5C9E2525DB8400F53BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E5CA22525DB8400F53BEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,111 +147,153 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		AA36040E2814550B00F312E4 /* TFLAudioRecord */ = {
+		AACEFEB02865A4A400D60017 /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E503B28141C4300883004 /* TFLAudioRecord.h */,
-				AA8E503C28141C4400883004 /* TFLAudioRecord.m */,
+				AACEFEB12865A4A400D60017 /* core */,
+				AACEFECB2865A4A400D60017 /* sources */,
 			);
-			path = TFLAudioRecord;
+			path = audio;
 			sourceTree = "<group>";
 		};
-		AA3CB348281D805200A51A6A /* TFLAudioTensor */ = {
+		AACEFEB12865A4A400D60017 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB355281D805200A51A6A /* TFLAudioTensor+Utils.h */,
-				AA3CB36B281D805200A51A6A /* TFLAudioTensor+Utils.m */,
-				AA3CB349281D805200A51A6A /* TFLAudioTensor.m */,
-				AA3CB34B281D805200A51A6A /* TFLAudioFormat.m */,
-				AA3CB34C281D805200A51A6A /* TFLRingBuffer.m */,
-				AA3CB34D281D805200A51A6A /* TFLFloatBuffer.h */,
-				AA3CB34F281D805200A51A6A /* TFLAudioTensor.h */,
-				AA3CB350281D805200A51A6A /* TFLRingBuffer.h */,
-				AA3CB351281D805200A51A6A /* TFLAudioFormat.h */,
-				AA3CB352281D805200A51A6A /* TFLFloatBuffer.m */,
-			);
-			path = TFLAudioTensor;
-			sourceTree = "<group>";
-		};
-		AA3CB354281D805200A51A6A /* TFLAudioClassifier */ = {
-			isa = PBXGroup;
-			children = (
-				AA3CB348281D805200A51A6A /* TFLAudioTensor */,
-				AA3CB356281D805200A51A6A /* TFLAudioClassifier.h */,
-				AA3CB36A281D805200A51A6A /* TFLAudioClassifier.m */,
-			);
-			path = TFLAudioClassifier;
-			sourceTree = "<group>";
-		};
-		AA3CB357281D805200A51A6A /* core */ = {
-			isa = PBXGroup;
-			children = (
-				AA3CB358281D805200A51A6A /* TFLBaseOptions.m */,
-				AA3CB35A281D805200A51A6A /* TFLBaseOptions.h */,
+				AACEFEB22865A4A400D60017 /* audio_record */,
+				AACEFEB92865A4A400D60017 /* sources */,
+				AACEFEC02865A4A400D60017 /* audio_tensor */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		AA3CB35D281D805200A51A6A /* processor */ = {
+		AACEFEB22865A4A400D60017 /* audio_record */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB35E281D805200A51A6A /* TFLClassificationOptions+Helpers.h */,
-				AA3CB35F281D805200A51A6A /* TFLClassificationOptions.m */,
-				AA3CB361281D805200A51A6A /* TFLCategory+Helpers.h */,
-				AA3CB363281D805200A51A6A /* TFLCategory.h */,
-				AA3CB364281D805200A51A6A /* TFLClassificationOptions.h */,
-				AA3CB365281D805200A51A6A /* TFLClassificationOptions+Helpers.m */,
-				AA3CB367281D805200A51A6A /* TFLCategory+Helpers.m */,
-				AA3CB369281D805200A51A6A /* TFLCategory.m */,
+				AACEFEB42865A4A400D60017 /* sources */,
 			);
-			path = processor;
+			path = audio_record;
 			sourceTree = "<group>";
 		};
-		AAA02928281EC40A0077BB51 /* changed */ = {
+		AACEFEB42865A4A400D60017 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				AAA0292C281EC5000077BB51 /* common */,
-				AAA0292A281EC4950077BB51 /* core */,
-				AAA02929281EC4190077BB51 /* processor */,
+				AACEFEB52865A4A400D60017 /* TFLAudioRecord.h */,
+				AACEFEB62865A4A400D60017 /* TFLAudioRecord.m */,
 			);
-			path = changed;
+			path = sources;
 			sourceTree = "<group>";
 		};
-		AAA02929281EC4190077BB51 /* processor */ = {
+		AACEFEB92865A4A400D60017 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB360281D805200A51A6A /* TFLClassificationResult.m */,
-				AA3CB362281D805200A51A6A /* TFLClassificationResult+Helpers.m */,
-				AA3CB366281D805200A51A6A /* TFLClassificationResult+Helpers.h */,
-				AA3CB368281D805200A51A6A /* TFLClassificationResult.h */,
+				AACEFEBA2865A4A400D60017 /* TFLAudioFormat.m */,
+				AACEFEBB2865A4A400D60017 /* TFLRingBuffer.m */,
+				AACEFEBC2865A4A400D60017 /* TFLFloatBuffer.h */,
+				AACEFEBD2865A4A400D60017 /* TFLRingBuffer.h */,
+				AACEFEBE2865A4A400D60017 /* TFLAudioFormat.h */,
+				AACEFEBF2865A4A400D60017 /* TFLFloatBuffer.m */,
 			);
-			path = processor;
+			path = sources;
 			sourceTree = "<group>";
 		};
-		AAA0292A281EC4950077BB51 /* core */ = {
+		AACEFEC02865A4A400D60017 /* audio_tensor */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB359281D805200A51A6A /* TFLBaseOptions+Helpers.h */,
-				AA3CB35B281D805200A51A6A /* TFLBaseOptions+Helpers.m */,
+				AACEFEC12865A4A400D60017 /* utils */,
+				AACEFEC62865A4A400D60017 /* sources */,
+			);
+			path = audio_tensor;
+			sourceTree = "<group>";
+		};
+		AACEFEC12865A4A400D60017 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFEC22865A4A400D60017 /* sources */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		AACEFEC22865A4A400D60017 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFEC32865A4A400D60017 /* TFLAudioTensor+Utils.h */,
+				AACEFEC42865A4A400D60017 /* TFLAudioTensor+Utils.m */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		AACEFEC62865A4A400D60017 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFEC72865A4A400D60017 /* TFLAudioTensor.m */,
+				AACEFEC82865A4A400D60017 /* TFLAudioTensor.h */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		AACEFECB2865A4A400D60017 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFECC2865A4A400D60017 /* TFLAudioClassifier.h */,
+				AACEFECD2865A4A400D60017 /* TFLAudioClassifier.m */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		AACEFEDB2865A4B100D60017 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFEDC2865A4B100D60017 /* sources */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		AAA0292B281EC4E40077BB51 /* common */ = {
+		AACEFEDC2865A4B100D60017 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB35C281D805200A51A6A /* TFLCommonUtils.h */,
-				AA3CB36C281D805200A51A6A /* TFLCommonUtils.m */,
+				AACEFEDD2865A4B100D60017 /* TFLBaseOptions.m */,
+				AACEFEDE2865A4B100D60017 /* TFLBaseOptions+Helpers.h */,
+				AACEFEDF2865A4B100D60017 /* TFLBaseOptions.h */,
+				AACEFEE02865A4B100D60017 /* TFLBaseOptions+Helpers.m */,
 			);
-			path = common;
+			path = sources;
 			sourceTree = "<group>";
 		};
-		AAA0292C281EC5000077BB51 /* common */ = {
+		AACEFEE22865A4B100D60017 /* processor */ = {
 			isa = PBXGroup;
 			children = (
-				AA3CB36D281D805200A51A6A /* TFLCommon.h */,
+				AACEFEE32865A4B100D60017 /* sources */,
 			);
-			path = common;
+			path = processor;
+			sourceTree = "<group>";
+		};
+		AACEFEE32865A4B100D60017 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFEE52865A4B100D60017 /* TFLClassificationOptions+Helpers.h */,
+				AACEFEE72865A4B100D60017 /* TFLClassificationOptions.m */,
+				AACEFEE82865A4B100D60017 /* TFLClassificationResult.m */,
+				AACEFEE92865A4B100D60017 /* TFLCategory+Helpers.h */,
+				AACEFEEA2865A4B100D60017 /* TFLClassificationResult+Helpers.m */,
+				AACEFEEC2865A4B100D60017 /* TFLCategory.h */,
+				AACEFEEF2865A4B100D60017 /* TFLClassificationOptions.h */,
+				AACEFEF12865A4B100D60017 /* TFLClassificationOptions+Helpers.m */,
+				AACEFEF32865A4B100D60017 /* TFLClassificationResult+Helpers.h */,
+				AACEFEF42865A4B100D60017 /* TFLCategory+Helpers.m */,
+				AACEFEF52865A4B100D60017 /* TFLClassificationResult.h */,
+				AACEFEF72865A4B100D60017 /* TFLCategory.m */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		AACEFF072865A68500D60017 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				AACEFF082865A68500D60017 /* TFLCommonUtils.h */,
+				AACEFF092865A68500D60017 /* TFLCommonUtils.m */,
+				AACEFF0A2865A68500D60017 /* TFLCommon.h */,
+			);
+			path = sources;
 			sourceTree = "<group>";
 		};
 		C83580D925392981007E9603 /* Model */ = {
@@ -290,22 +332,20 @@
 		C86E5C9D2525DB8400F53BEA /* SoundClassification */ = {
 			isa = PBXGroup;
 			children = (
-				AAA0292B281EC4E40077BB51 /* common */,
-				AA3CB357281D805200A51A6A /* core */,
-				AA3CB35D281D805200A51A6A /* processor */,
-				AAA02928281EC40A0077BB51 /* changed */,
-				AA3CB354281D805200A51A6A /* TFLAudioClassifier */,
+				AACEFF072865A68500D60017 /* sources */,
+				AACEFEDB2865A4B100D60017 /* core */,
+				AACEFEE22865A4B100D60017 /* processor */,
+				AACEFEB02865A4A400D60017 /* audio */,
 				C83580D925392981007E9603 /* Model */,
 				C86E5C9E2525DB8400F53BEA /* AppDelegate.swift */,
 				AA86A4C22840E82900649928 /* speech.wav */,
-				AA36040E2814550B00F312E4 /* TFLAudioRecord */,
 				C86E5CA22525DB8400F53BEA /* ViewController.swift */,
+				AACEFF0C2865A71500D60017 /* SoundClassifier.swift .swift */,
 				C86E5CA42525DB8400F53BEA /* Main.storyboard */,
 				C86E5CA72525DB8600F53BEA /* Assets.xcassets */,
 				C86E5CA92525DB8600F53BEA /* LaunchScreen.storyboard */,
 				C86E5CAC2525DB8600F53BEA /* Info.plist */,
 				C83B9C81256BB4C000EA2282 /* AudioInputManager.swift */,
-				C83B9C8C256D38DB00EA2282 /* SoundClassifier.swift */,
 				C8FF9D322577CFB2004ED628 /* ProbabilityTableViewCell.swift */,
 				AA2587C0280EF9D30056CC58 /* SoundClassification-Bridging-Header.h */,
 			);
@@ -479,28 +519,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA3CB370281D805200A51A6A /* TFLAudioFormat.m in Sources */,
-				AA3CB377281D805200A51A6A /* TFLClassificationResult+Helpers.m in Sources */,
-				AA8E503D28141C4400883004 /* TFLAudioRecord.m in Sources */,
-				AA3CB374281D805200A51A6A /* TFLBaseOptions+Helpers.m in Sources */,
-				AA3CB379281D805200A51A6A /* TFLCategory+Helpers.m in Sources */,
-				AA3CB37D281D805200A51A6A /* TFLCommonUtils.m in Sources */,
-				AA3CB376281D805200A51A6A /* TFLClassificationResult.m in Sources */,
+				AACEFEFD2865A4B100D60017 /* TFLClassificationResult.m in Sources */,
+				AACEFED42865A4A400D60017 /* TFLAudioTensor+Utils.m in Sources */,
+				AACEFF052865A4B100D60017 /* TFLCategory.m in Sources */,
 				C86E5CA32525DB8400F53BEA /* ViewController.swift in Sources */,
-				AA3CB372281D805200A51A6A /* TFLFloatBuffer.m in Sources */,
-				AA3CB373281D805200A51A6A /* TFLBaseOptions.m in Sources */,
+				AACEFED62865A4A400D60017 /* TFLAudioTensor.m in Sources */,
+				AACEFEFC2865A4B100D60017 /* TFLClassificationOptions.m in Sources */,
 				C86E5C9F2525DB8400F53BEA /* AppDelegate.swift in Sources */,
+				AACEFEF92865A4B100D60017 /* TFLBaseOptions.m in Sources */,
+				AACEFED22865A4A400D60017 /* TFLRingBuffer.m in Sources */,
+				AACEFF042865A4B100D60017 /* TFLCategory+Helpers.m in Sources */,
+				AACEFF032865A4B100D60017 /* TFLClassificationOptions+Helpers.m in Sources */,
 				C8FF9D332577CFB2004ED628 /* ProbabilityTableViewCell.swift in Sources */,
-				AA3CB36E281D805200A51A6A /* TFLAudioTensor.m in Sources */,
-				AA3CB378281D805200A51A6A /* TFLClassificationOptions+Helpers.m in Sources */,
-				C83B9C8D256D38DB00EA2282 /* SoundClassifier.swift in Sources */,
-				AA3CB375281D805200A51A6A /* TFLClassificationOptions.m in Sources */,
-				AA3CB37B281D805200A51A6A /* TFLAudioClassifier.m in Sources */,
-				AA3CB371281D805200A51A6A /* TFLRingBuffer.m in Sources */,
-				AA3CB37A281D805200A51A6A /* TFLCategory.m in Sources */,
+				AACEFEFA2865A4B100D60017 /* TFLBaseOptions+Helpers.m in Sources */,
+				AACEFF0B2865A68500D60017 /* TFLCommonUtils.m in Sources */,
+				AACEFECF2865A4A400D60017 /* TFLAudioRecord.m in Sources */,
+				AACEFEFE2865A4B100D60017 /* TFLClassificationResult+Helpers.m in Sources */,
+				AACEFF0D2865A71500D60017 /* SoundClassifier.swift .swift in Sources */,
+				AACEFED92865A4A400D60017 /* TFLAudioClassifier.m in Sources */,
+				AACEFED12865A4A400D60017 /* TFLAudioFormat.m in Sources */,
 				AAA0292F281ED48B0077BB51 /* SampleObjc.m in Sources */,
 				C83B9C82256BB4C000EA2282 /* AudioInputManager.swift in Sources */,
-				AA3CB37C281D805200A51A6A /* TFLAudioTensor+Utils.m in Sources */,
+				AACEFED32865A4A400D60017 /* TFLFloatBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
