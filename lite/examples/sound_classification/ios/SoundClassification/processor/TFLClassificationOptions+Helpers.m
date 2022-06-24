@@ -25,17 +25,17 @@
                           description:@"Invalid length of strings found for list type options."];
     return nil;
   }
-
+  
   char **cStrings = [TFLCommonUtils mallocWithSize:strings.count * sizeof(char *) error:error];
   if (!cStrings) return NULL;
-
+  
   for (NSInteger i = 0; i < strings.count; i++) {
     cStrings[i] = [TFLCommonUtils
-        mallocWithSize:([strings[i] lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 1) *
-                       sizeof(char)
-                 error:error];
+                   mallocWithSize:([strings[i] lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 1) *
+                   sizeof(char)
+                   error:error];
     if (!cStrings[i]) return NULL;
-
+    
     strcpy(cStrings[i], strings[i].UTF8String);
   }
   return cStrings;
@@ -45,7 +45,7 @@
   for (NSInteger i = 0; i < count; i++) {
     free(cStrings[i]);
   }
-
+  
   free(cStrings);
 }
 
@@ -53,28 +53,28 @@
                  error:(NSError **)error {
   cClassificationOptions->score_threshold = self.scoreThreshold;
   cClassificationOptions->max_results = (int)self.maxResults;
-
+  
   if (self.labelDenyList) {
     char **cClassNameBlackList =
-        [TFLClassificationOptions cStringArrayFromNSArray:self.labelDenyList error:error];
+    [TFLClassificationOptions cStringArrayFromNSArray:self.labelDenyList error:error];
     if (!cClassNameBlackList) {
       return NO;
     }
     cClassificationOptions->label_denylist.list = cClassNameBlackList;
     cClassificationOptions->label_denylist.length = (int)self.labelDenyList.count;
   }
-
+  
   if (self.labelAllowList) {
     char **cClassNameWhiteList =
-        [TFLClassificationOptions cStringArrayFromNSArray:self.labelAllowList error:error];
+    [TFLClassificationOptions cStringArrayFromNSArray:self.labelAllowList error:error];
     if (!cClassNameWhiteList) {
       return NO;
     }
-
+    
     cClassificationOptions->label_allowlist.list = cClassNameWhiteList;
     cClassificationOptions->label_allowlist.length = (int)self.labelAllowList.count;
   }
-
+  
   if (self.displayNamesLocale) {
     if (self.displayNamesLocale.UTF8String) {
       cClassificationOptions->display_names_local = strdup(self.displayNamesLocale.UTF8String);
@@ -88,22 +88,22 @@
       return NO;
     }
   }
-
+  
   return YES;
 }
 
 - (void)deleteAllocatedMemoryOfClassificationOptions:
-    (TfLiteClassificationOptions *)cClassificationOptions {
+(TfLiteClassificationOptions *)cClassificationOptions {
   if (self.labelAllowList) {
     [TFLClassificationOptions deleteCStringsArray:cClassificationOptions->label_allowlist.list
                                             count:cClassificationOptions->label_allowlist.length];
   }
-
+  
   if (self.labelDenyList) {
     [TFLClassificationOptions deleteCStringsArray:cClassificationOptions->label_denylist.list
                                             count:cClassificationOptions->label_denylist.length];
   }
-
+  
   free(cClassificationOptions->display_names_local);
 }
 

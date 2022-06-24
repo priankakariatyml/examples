@@ -19,30 +19,35 @@ NS_ASSUME_NONNULL_BEGIN
 /** An wrapper class to store pointer to a float array and its size. */
 @interface TFLFloatBuffer : NSObject <NSCopying>
 
-/** Size of the array. */
+/** Capacity of the array in number of elements. */
 @property(nonatomic, readonly) NSUInteger size;
 
-/** Pointer to float array wrapped by TFLFloatBuffer. */
+/** Pointer to float array wrapped by `TFLFloatBuffer`. */
 @property(nonatomic, readonly) float *data;
 
 /**
- * Initializes a TFLFloatBuffer by copying the array specified in the arguments.
+ * Initializes a new `TFLFloatBuffer` by copying the elements of the given float data array.
  *
- * @param data A pointer to a float array whose values are to be copied into the buffer.
- * @param size Size of the array pointed to by the input float array.
+ * @param data A pointer to a float data array whose values are to be copied into the buffer.
+ * @param size Size of the array float data array.
  *
- * @return An instance of TFLFloatBuffer
+ * @return A new instance of `TFLFloatBuffer` initialized with the elements of the given float data
+ * array.
  */
 - (instancetype)initWithData:(float *)data size:(NSUInteger)size;
 
 /**
- * Initializes a TFLFloatBuffer of the specified size with the zeros .
+ * Initializes a `TFLFloatBuffer` of the specified size with zeros.
  *
- * @param size Number of elements the float buffer can hold.
+ * @param size Number of elements the `TFLFloatBuffer` can hold.
  *
- * @return An instance of TFLFloatBuffer
+ * @return A new instance of `TFLFloatBuffer` of the given size with all elements initialized to
+ * zero.
  */
 - (instancetype)initWithSize:(NSUInteger)size;
+
+/** Clears the `TFLFloatBuffer` by setting all elements to zero */
+- (void)clear;
 
 @end
 

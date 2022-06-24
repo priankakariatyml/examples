@@ -68,9 +68,10 @@ public class SoundClassifier {
     ) else { return }
     
     do {
-      self.audioClassifier = try AudioClassifier(modelPath:modelPath);
+      let options = AudioClassifierOptions(modelPath: modelPath)
+      self.audioClassifier = try AudioClassifier.classifier(options: options)
       self.audioRecord = try audioClassifier?.createAudioRecord();
-      self.audioTensor = try audioClassifier?.createInputAudioTensor()
+      self.audioTensor = audioClassifier?.createInputAudioTensor()
     } catch {
       print("Failed to set up the audio classifier with error: \(error.localizedDescription)")
     }
@@ -96,7 +97,7 @@ public class SoundClassifier {
     timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { timer in
         do {
           // Read the audio record's latest buffer into audioTensor's buffer.
-          try self.audioTensor?.loadAudioRecord(audioRecord: self.audioRecord!)
+          try self.audioTensor?.load(audioRecord: self.audioRecord!)
           
           // Classify the resulting audio tensor buffer.
           if let audioTensor = self.audioTensor {

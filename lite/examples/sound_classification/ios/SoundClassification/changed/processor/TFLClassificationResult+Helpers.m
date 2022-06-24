@@ -18,9 +18,9 @@
 @implementation TFLClassificationResult (Helpers)
 
 + (TFLClassificationResult *)classificationResultWithCResult:
-    (TfLiteClassificationResult *)cClassificationResult {
+(TfLiteClassificationResult *)cClassificationResult {
   if (!cClassificationResult) return nil;
-
+  
   NSMutableArray *classificationHeads = [[NSMutableArray alloc] init];
   for (int i = 0; i < cClassificationResult->size; i++) {
     TfLiteClassifications cClassifications = cClassificationResult->classifications[i];
@@ -31,16 +31,18 @@
     }
     
     NSString *headName = nil;
+    
     if (cClassifications.head_name) {
       headName = [NSString stringWithCString:cClassifications.head_name encoding:NSUTF8StringEncoding];
     }
+    
     TFLClassifications *classifications = [[TFLClassifications alloc] initWithHeadIndex:cClassifications.head_index
                                                                                headName:headName
                                                                              categories:categories];
-
+    
     [classificationHeads addObject:classifications];
   }
-
+  
   return [[TFLClassificationResult alloc] initWithClassifications:classificationHeads];
 }
 @end

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
                  error:(NSError **)error;
 
 - (void)deleteAllocatedMemoryOfClassificationOptions:
-    (TfLiteClassificationOptions *)cClassificationOptions;
+(TfLiteClassificationOptions *)cClassificationOptions;
 @end
 
 NS_ASSUME_NONNULL_END

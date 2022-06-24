@@ -18,10 +18,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFLBaseOptions (Helpers)
-
 - (void)copyToCOptions:(TfLiteBaseOptions *)cBaseOptions;
-+ (void)copyModelPath:(NSString *)modelPath toCOptions:(TfLiteBaseOptions *)cBaseOptions;
-
 @end
 
 NS_ASSUME_NONNULL_END

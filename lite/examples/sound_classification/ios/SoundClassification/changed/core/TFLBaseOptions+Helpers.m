@@ -17,13 +17,9 @@
 @implementation TFLBaseOptions (Helpers)
 
 - (void)copyToCOptions:(TfLiteBaseOptions *)cBaseOptions {
-  if (self.modelFile.filePath.UTF8String) {
+  if (self.modelFile.filePath) {
     cBaseOptions->model_file.file_path = self.modelFile.filePath.UTF8String;
   }
-}
-
-+ (void)copyModelPath:(NSString *)modelPath toCOptions:(TfLiteBaseOptions *)cBaseOptions {
-    cBaseOptions->model_file.file_path = modelPath.UTF8String;
 }
 
 @end

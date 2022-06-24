@@ -20,50 +20,62 @@ NS_ASSUME_NONNULL_BEGIN
 /** An wrapper class which stores a buffer that is written in circular fashion. */
 @interface TFLRingBuffer : NSObject
 
-//@property(nonatomic, assign)NSUInteger size;
 /**
- * Initializes a TFLRingBuffer by copying the array with the specified size.
+ * A copy of all the internal ring buffer elements in order.
+ */
+@property(nullable, nonatomic, readonly) TFLFloatBuffer *floatBuffer;
+
+/**
+ * Capacity of the ring buffer in number of elements.
+ */
+@property(nonatomic, readonly) NSUInteger size;
+
+/**
+ * Initializes a new `TFLRingBuffer` with the given size. All elements of the
+ * `TFLRingBuffer` will be initialized to zero.
  *
  * @param size Size of the ring buffer.
  *
- * @return An instance of TFLRingBuffer.
+ * @return A new instance of `TFLRingBuffer` with the given size and all elements
+ * initialized to zero.
  */
-- (instancetype)initWithBufferSize:(NSInteger)size;
+- (instancetype)initWithBufferSize:(NSUInteger)size;
 
 /**
  * Loads a slice of a float array to the ring buffer. If the float array is longer than ring
  * buffer's capacity, samples with lower indices in the array will be ignored.
  *
+ * @param data A pointer to a float data array whose values are to be loaded into the ring buffer.
+ * @param size Size of the float data array pointed to by param `data`.
+ * @param offset Offset in array pointed to by `data` from which elements are to be loaded into the
+ * ring buffer.
+ * @param size Number of elements to be copied into the ring buffer, starting from `offset`.
+ *
  * @return Boolean indicating success or failure of loading operation.
  */
-- (BOOL)loadBuffer:(TFLFloatBuffer *)sourceBuffer
-            offset:(NSUInteger)offset
-              size:(NSUInteger)size
-             error:(NSError **)error;
+- (BOOL)loadFloatData:(float *)data
+             dataSize:(NSUInteger)dataSize
+               offset:(NSUInteger)offset
+                 size:(NSUInteger)size
+                error:(NSError **)error;
 
 /**
- * Returns a TFLFloatBuffer with the all the ring buffer elements in order.
- *
- * @return A TFLFloatBuffer.
- */
-- (TFLFloatBuffer *)floatBuffer NS_SWIFT_NAME(floatBuffer());
-
-/**
- * Returns a TFLFloatBuffer with the  size number of ring buffer elements in order starting at
- * offset.
+ * Returns a `TFLFloatBuffer` with a copy of size number of the ring buffer elements in order
+ * starting at offset, i.e, buffer[offset:offset+size].
  *
  * @param offset Offset in the ring buffer from which elements are to be returned.
  *
  * @param size Number of elements to be returned.
  *
- * @return A TFLFloatBuffer if offset + size is within the bounds of the ring buffer, otherwise nil.
+ * @return A new `TFLFloatBuffer` if offset + size is within the bounds of the ring buffer,
+ * otherwise nil.
  */
 - (nullable TFLFloatBuffer *)floatBufferWithOffset:(NSUInteger)offset size:(NSUInteger)size;
 
 /**
- * Capacity of ring buffer in number of elements.
+ * Clears the `TFLRingBuffer` by setting all the elements to zero .
  */
-- (NSUInteger)size NS_SWIFT_NAME(size());
+- (void)clear;
 
 @end
 

@@ -32,13 +32,13 @@
 
 - (id)copyWithZone:(NSZone *)zone {
   TFLClassificationOptions *classificationOptions = [[TFLClassificationOptions alloc] init];
-
+  
   classificationOptions.scoreThreshold = self.scoreThreshold;
   classificationOptions.maxResults = self.maxResults;
   classificationOptions.labelDenyList = self.labelDenyList;
   classificationOptions.labelAllowList = self.labelAllowList;
   classificationOptions.displayNamesLocale = self.displayNamesLocale;
-
+  
   return classificationOptions;
 }
 

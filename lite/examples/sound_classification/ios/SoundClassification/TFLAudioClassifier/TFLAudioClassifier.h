@@ -22,39 +22,38 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Options to configure TFLAudioClassifier.
+ * Options to configure `TFLAudioClassifier`.
  */
 NS_SWIFT_NAME(AudioClassifierOptions)
 @interface TFLAudioClassifierOptions : NSObject
 
 /**
- * Base options that is used for creation of any type of task.
+ * Base options that are used for creation of any type of task.
+ * @discussion Please see `TFLBaseOptions` for more details.
  */
 @property(nonatomic, copy) TFLBaseOptions *baseOptions;
 
 /**
  * Options that configure the display and filtering of results.
+ * @discussion Please see `TFLClassificationOptions` for more details.
  */
 @property(nonatomic, copy) TFLClassificationOptions *classificationOptions;
 
 /**
- * Initializes TFLAudioClassifierOptions with the model path set to the specified path to a model
- * file.
- * @discussion The external model file, must be a single standalone TFLite file. It could be packed
+ * Initializes a new `TFLAudioClassifierOptions` with the absolute path to the model file stored
+ * locally on the device.
+ *
+ * @discussion The external model file must be a single standalone TFLite file. It could be packed
  * with TFLite Model Metadata[1] and associated files if exist. Fail to provide the necessary
- * metadata and associated files might result in errors. Check the [documentation]
- * (https://www.tensorflow.org/lite/convert/metadata) for each task about the specific requirement.
+ * metadata and associated files might result in errors. Check the
+ * [documentation](https://www.tensorflow.org/lite/convert/metadata) for each task about the
+ * specific requirement.
  *
- * @param modelPath Path to a TFLite model file.
+ * @param modelPath An absolute path to a TensorFlow Lite model file stored locally on the device.
  *
- * @return An instance of TFLAudioClassifierOptions set to the specified
- * modelPath.
+ * @return An instance of `TFLAudioClassifierOptions` initialized to the given model path.
  */
 - (instancetype)initWithModelPath:(NSString *)modelPath;
-
-- (instancetype)init NS_UNAVAILABLE;
-
-+ (instancetype)new NS_UNAVAILABLE;
 
 @end
 
@@ -65,98 +64,63 @@ NS_SWIFT_NAME(AudioClassifier)
 @interface TFLAudioClassifier : NSObject
 
 /**
- * Creates TFLAudioClassifier from a model file at location modelPath .
+ * Creates a new instance of `TFLAudioClassifier` from the given `TFLAudioClassifierOptions`.
  *
- * @discussion The external model file, must be a single standalone TFLite file. It could be packed
- * with TFLite Model Metadata[1] and associated files if exist. Fail to provide the necessary
- * metadata and associated files might result in errors. Check the [documentation]
- * (https://www.tensorflow.org/lite/convert/metadata) for each task about the specific requirement.
+ * @param options The options to use for configuring the `TFLAudioClassifier`.
+ * @param error An optional error parameter populated when there is an error in initializing
+ * the audio classifier.
  *
- * @param modelPath Path to the model file.
- *
- * @param error Address to an NSError * to populate the reason for failure to create
- * TFLAudioClassifier if the method returns nil.
- *
- * @return A TFLAudioClassifier instance if modelPath points to a model file that meets the
- * specifications. nil is returned if initialisation is unsuccessful.
+ * @return A new instance of `TFLAudioClassifier` with the given options. `nil` if there is an error
+ * in initializing the audio classifier.
  */
-- (nullable instancetype)initWithModelPath:(NSString *)modelPath error:(NSError **)error;
++ (nullable instancetype)audioClassifierWithOptions:(TFLAudioClassifierOptions *)options
+                                              error:(NSError **)error
+NS_SWIFT_NAME(classifier(options:));
+
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
- * Creates TFLAudioClassifier from TFLAudioClassifierOptions.
- * @param options TFLAudioClassifierOptions specifying the modelPath to a model file and other
- * custom options for configuring the TFLAudioClassifier.
+ * Creates a `TFLAudioTensor` instance to store the input audio samples to be classified. The
+ * created `TFLAudioTensor` has the same buffer size as the model input tensor and audio format
+ * required by the model.
  *
- * @param error Address to an NSError * to populate the reason for failure to create
- * TFLAudioClassifier if the method returns nil.
+ * @param error An optional error parameter populated when there is an error in creating the audio
+ * tensor.
  *
- * @return A TFLAudioClassifier instance if initialization is successful or nil in case of failure.
+ * @return A `TFLAudioTensor` with the same buffer size as the model input tensor and audio format
+ * required by the model, if creation is successful otherwise nil.
  */
-- (nullable instancetype)initWithOptions:(TFLAudioClassifierOptions *)options
-                                   error:(NSError *_Nullable *)error;
+- (TFLAudioTensor *)createInputAudioTensor;
 
 /**
- * Creates a TFLAudioTensor instance to store input audio samples.
+ * Creates a `TFLAudioRecord` instance to start recording audio input from the microphone. The
+ * returned `TFLAudioRecord` instance instance is initialized with the audio format and twice the
+ * input buffer size required by the model.
  *
- * @param error Address to an NSError * to populate the reason for failure to create TFLAudioTensor
- * if the method returns nil.
+ * @discussion After creating the `TFLAudioRecord` using this function, the client needs to call
+ * -[TFLAudioRecord startRecordingWithError:] to start recording the audio from the microphone.
  *
- * @return A TFLAudioTensor with the same buffer size as the model input tensor if creation is
- * successful otherwise nil.
- */
-- (nullable TFLAudioTensor *)createInputAudioTensorWithError:(NSError **)error;
-
-/**
- * Creates an TFLAudioRecord instance to tap audio data from input audio stream. The returned
- * TFLAudioRecordinstance instance is initialized with the same audio format and 2 * input buffer
- * size required by the model.
+ * @param error An optional error parameter populated if there is an error in creating the audio
+ * record.
  *
- * @discussion The  client needs to call TFLAudioRecord's - (BOOL)startRecordingWithError:(NSError
- * **)error to start tapping the input audio stream.
- *
- * @param error Address to an NSError * to populate the reason for failure to create TFLAudioRecord
- * if the method returns nil.
- *
- * @return A TFLAudioRecord instance if creation is successful or nil in case of failure.
+ * @return A `TFLAudioRecord` instance with audio format and twice the input buffer size required by
+ * the model, if creation is successful or nil in case of failure.
  */
 - (nullable TFLAudioRecord *)createAudioRecordWithError:(NSError **)error;
 
 /**
- * Returns the required input buffer size in number elements or zero in case of failure to determine
- * the input buffer size.
+ * Performs classification on an array of audio samples encapsulated by `TFLAudioTensor`.
  *
- * @param error Address to an NSError * to populate the reason for failure to determine the input
- * buffer size.
+ * @param audioTensor A `TFLAudioTensor` to be classified.
  *
- * @return Required input buffer size in number elements or zero in case of failure to determine the
- * input buffer size
- */
-- (NSInteger)requiredBufferSizeWithError:(NSError **)error;
-
-/**
- * Returns the  TFLAudioFormat matching the model requirements
- *
- * @param error Address to an NSError * to populate the reason for failure to return a
- * TFLAudioFormat if the method returns nil.
- *
- * @return Returns the TFLAudioFormat matching the model requirements or nil in case of failure to
- * determine the required TFLAudioFormat.
- */
-- (TFLAudioFormat *)requiredTensorFormatWithError:(NSError **)error;
-
-/**
- * Performs classification on an array of audio samples held by TFLAudioTensor input and returns a
- * TFLClassificationResult which holds results of classification for each head of the model.
- *
- * @param audioTensor TFLAudioTensor to be classified.
- *
- * @return TFLClassificationResult which holds results of classification for each head of the model.
+ * @return A `TFLClassificationResult` with one set of results per audio classifier head. `nil` if
+ * there is an error encountered during classification. Please see `TFLClassificationResult` for
+ * more details.
  */
 - (nullable TFLClassificationResult *)classifyWithAudioTensor:(TFLAudioTensor *)audioTensor
                                                         error:(NSError **)error
-    NS_SWIFT_NAME(classify(audioTensor:));
+NS_SWIFT_NAME(classify(audioTensor:));
 
-+ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 @end

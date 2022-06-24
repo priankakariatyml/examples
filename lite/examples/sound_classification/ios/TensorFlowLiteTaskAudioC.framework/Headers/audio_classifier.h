@@ -1,4 +1,4 @@
-/* Copyright 2021 The TensorFlow Authors. All Rights Reserved.
+/* Copyright 2022 The TensorFlow Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ limitations under the License.
 #include <stdint.h>
 
 #include "common.h"
+#include "audio_buffer.h"
 #include "base_options.h"
 #include "classification_options.h"
-#include "audio_buffer.h"
 #include "classification_result.h"
 
 // --------------------------------------------------------------------------
@@ -185,11 +185,15 @@ TfLiteAudioClassifier* TfLiteAudioClassifierFromOptions(
 //
 TfLiteClassificationResult* TfLiteAudioClassifierClassify(
     const TfLiteAudioClassifier* classifier,
-    const TfLiteAudioBuffer* frame_buffer, TfLiteSupportError** error);
+    const TfLiteAudioBuffer* audio_buffer, TfLiteSupportError** error);
 
-int TfLiteAudioClassifierGetRequiredInputBufferSize(TfLiteAudioClassifier* classifier, TfLiteSupportError** error);
+// Returns the input buffer size required by the audio classifier.
+int TfLiteAudioClassifierGetRequiredInputBufferSize(
+    TfLiteAudioClassifier* classifier, TfLiteSupportError** error);
 
-TfLiteAudioFormat* TfLiteAudioClassifierGetRequiredAudioFormat(TfLiteAudioClassifier* classifier, TfLiteSupportError** error);
+// Returns the audio format required by the audio classifier.
+TfLiteAudioFormat* TfLiteAudioClassifierGetRequiredAudioFormat(
+    TfLiteAudioClassifier* classifier, TfLiteSupportError** error);
 
 // Disposes off the audio classifier.
 void TfLiteAudioClassifierDelete(TfLiteAudioClassifier* classifier);

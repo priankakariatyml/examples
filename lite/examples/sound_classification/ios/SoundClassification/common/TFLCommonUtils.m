@@ -23,8 +23,18 @@ static NSString *const TFLSupportTaskErrorDomain = @"org.tensorflow.lite.tasks";
 + (void)createCustomError:(NSError **)error
                  withCode:(NSInteger)code
               description:(NSString *)description {
+  [TFLCommonUtils createCustomError:error
+                         withDomain:TFLSupportTaskErrorDomain
+                               code:code
+                        description:description];
+}
+
++ (void)createCustomError:(NSError **)error
+               withDomain:(NSString *)domain
+                     code:(NSInteger)code
+              description:(NSString *)description {
   if (error) {
-    *error = [NSError errorWithDomain:TFLSupportTaskErrorDomain
+    *error = [NSError errorWithDomain:domain
                                  code:code
                              userInfo:@{NSLocalizedDescriptionKey : description}];
   }
@@ -36,7 +46,7 @@ static NSString *const TFLSupportTaskErrorDomain = @"org.tensorflow.lite.tasks";
   }
   NSString *description = [NSString stringWithCString:supportError->message
                                              encoding:NSUTF8StringEncoding];
-  [self createCustomError:error withCode:supportError->code description:description];
+  [TFLCommonUtils createCustomError:error withCode:supportError->code description:description];
   return NO;
 }
 
@@ -47,12 +57,12 @@ static NSString *const TFLSupportTaskErrorDomain = @"org.tensorflow.lite.tasks";
                           description:@"memSize cannot be zero."];
     return NULL;
   }
-
+  
   void *allocedMemory = malloc(memSize);
   if (!allocedMemory) {
     exit(-1);
   }
-
+  
   return allocedMemory;
 }
 
