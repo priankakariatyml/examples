@@ -1,4 +1,4 @@
-#source 'https://github.com/priankakariatyml/tfltask-pod-test.git'
+source 'https://github.com/priankakariatyml/tfltask-pod-test.git'
 
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '10.0'
@@ -9,6 +9,8 @@ target 'ImageClassification' do
 
   # Pods for ImageClassification
 
-  pod 'TensorFlowLiteTaskVision'
+  pod 'TensorFlowLiteTaskVision', '~>0.1.9'
+  pod 'TensorFlowLiteTaskText', '~>0.1.0'
+
 
 end

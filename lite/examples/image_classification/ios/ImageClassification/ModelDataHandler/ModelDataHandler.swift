@@ -16,6 +16,7 @@ import CoreImage
 import UIKit
 import Accelerate
 import TensorFlowLiteTaskVision
+import TensorFlowLiteTaskText
 
 
 /// A result from invoking the `Interpreter`.
@@ -90,12 +91,29 @@ class ModelDataHandler {
     options.classificationOptions.maxResults = resultCount
   
     do {
-        imageClassifier = try ImageClassifier.imageClassifier(options: options)
+        imageClassifier = try ImageClassifier.classifier(options: options)
       }
       catch {
         print("Failed to create the classifier with error: \(error.localizedDescription)")
         return nil
       }
+    
+    guard let textModelPath = Bundle.main.path(
+      forResource: "test_model_nl_classifier_with_regex_tokenizer",
+      ofType: modelFileInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(modelFilename).")
+      return nil
+    }
+    
+    
+    let nLClassifier = TFLNLClassifier.nlClassifier(modelPath: textModelPath, options: TFLNLClassifierOptions())
+  
+    
+    let categories = nLClassifier.classify(text: "This is the best movie I’ve seen in recent years.")
+    print(categories)
+
+    
   }
 
   // MARK: - Internal Methods
@@ -109,7 +127,7 @@ class ModelDataHandler {
       }
       
       let classificationResult = try imageClassifier.classify(
-        gmlImage: gmlImage)
+        mlImage: gmlImage)
             
       print("Top \(resultCount) Results")
       
