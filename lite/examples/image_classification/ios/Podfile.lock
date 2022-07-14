@@ -1,20 +1,20 @@
 PODS:
-  - TensorFlowLiteTaskText (0.1.0)
-  - TensorFlowLiteTaskVision (0.1.9)
+  - TensorFlowLiteTaskText (0.0.1-nightly.20220714)
+  - TensorFlowLiteTaskVision (0.0.1-nightly.20220714)
 
 DEPENDENCIES:
-  - TensorFlowLiteTaskText (~> 0.1.0)
-  - TensorFlowLiteTaskVision (~> 0.1.9)
+  - TensorFlowLiteTaskText (~> 0.0.1-nightly.20220714)
+  - TensorFlowLiteTaskVision (~> 0.0.1-nightly.20220714)
 
 SPEC REPOS:
-  https://github.com/priankakariatyml/tfltask-pod-test.git:
+  trunk:
     - TensorFlowLiteTaskText
     - TensorFlowLiteTaskVision
 
 SPEC CHECKSUMS:
-  TensorFlowLiteTaskText: 6415699b828235e3336f23eba3d93b97e97bd9bf
-  TensorFlowLiteTaskVision: 1247389a86be0391ff3019e5d6090aea6f5cd2d5
+  TensorFlowLiteTaskText: 9f0576e537a2819e6cfa0c56ef746cce9eebc8ad
+  TensorFlowLiteTaskVision: 2ad61baab0c01707cded4e8ee92290f78ab48c05
 
-PODFILE CHECKSUM: 3c851adc36bc9075a071d48d086d3a64760d3314
+PODFILE CHECKSUM: 9e0ba150e3a89004581a928ff20d43823ffe9b08
 
 COCOAPODS: 1.11.3

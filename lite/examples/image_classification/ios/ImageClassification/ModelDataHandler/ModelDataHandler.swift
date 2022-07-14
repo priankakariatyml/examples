@@ -112,6 +112,12 @@ class ModelDataHandler {
     
     let categories = nLClassifier.classify(text: "This is the best movie I’ve seen in recent years.")
     print(categories)
+    
+//    let bertNLClass = TFLBertNLClassifier.bertNLClassifier(modelPath: textModelPath)
+//    let cats = bertNLClass.classify(text: "This is the best movie I’ve seen in recent years.")
+    
+    let qa = TFLBertQuestionAnswerer.questionAnswerer(modelPath: textModelPath)
+    let ans: [TFLQAAnswer] = qa.answer(context: "", question: "")
 
     
   }
