@@ -58,7 +58,7 @@ class ImageSegmentator {
 
       do {
         // Create the `Interpreter`.
-        let imageSegmenter = try ImageSegmenter.imageSegmenter(options: options)
+        let imageSegmenter = try ImageSegmenter.segmenter(options: options)
         
         let segmentator = ImageSegmentator(
           tfLiteQueue: tfLiteQueue,
@@ -106,7 +106,7 @@ class ImageSegmentator {
           return
         }
         
-        let segmentationResult = try self.imageSegmenter.segment(gmlImage: mlImage)
+        let segmentationResult = try self.imageSegmenter.segment(mlImage: mlImage)
         
         print("First Colored Label:\(segmentationResult.segmentations[0].coloredLabels[0].label) Segmentation Mask Object: \(segmentationResult.segmentations[0].categoryMask)")
         DispatchQueue.main.async {
