@@ -98,7 +98,7 @@ class ModelDataHandler: NSObject {
     
     do {
       // Create the `Interpreter`.
-      objectDetector = try ObjectDetector.objectDetector(options: options)
+      objectDetector = try ObjectDetector.detector(options: options)
      
     } catch let error {
       print("Failed to create the interpreter with error: \(error.localizedDescription)")
@@ -118,7 +118,7 @@ class ModelDataHandler: NSObject {
       guard let gmlImage = MLImage(sampleBuffer: sampleBuffer) else {
         return nil;
       }
-      let detectionResult = try objectDetector.detect(gmlImage: gmlImage)
+      let detectionResult = try objectDetector.detect(mlImage: gmlImage)
       
       print("Top 3 Objects Detected")
 

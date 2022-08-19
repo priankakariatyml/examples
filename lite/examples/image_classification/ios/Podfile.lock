@@ -1,10 +1,10 @@
 PODS:
-  - TensorFlowLiteTaskText (0.0.1-nightly.20220714)
-  - TensorFlowLiteTaskVision (0.0.1-nightly.20220714)
+  - TensorFlowLiteTaskText (0.4.2)
+  - TensorFlowLiteTaskVision (0.4.2)
 
 DEPENDENCIES:
-  - TensorFlowLiteTaskText (~> 0.0.1-nightly.20220714)
-  - TensorFlowLiteTaskVision (~> 0.0.1-nightly.20220714)
+  - TensorFlowLiteTaskText
+  - TensorFlowLiteTaskVision
 
 SPEC REPOS:
   trunk:
@@ -12,9 +12,9 @@ SPEC REPOS:
     - TensorFlowLiteTaskVision
 
 SPEC CHECKSUMS:
-  TensorFlowLiteTaskText: 9f0576e537a2819e6cfa0c56ef746cce9eebc8ad
-  TensorFlowLiteTaskVision: 2ad61baab0c01707cded4e8ee92290f78ab48c05
+  TensorFlowLiteTaskText: 9d1f7fe32cddbb0a1481e12ab20884e304387a86
+  TensorFlowLiteTaskVision: c5a0f4d6c220d27fe2f2f83dd04c69dff56d2768
 
-PODFILE CHECKSUM: 9e0ba150e3a89004581a928ff20d43823ffe9b08
+PODFILE CHECKSUM: 99d613a915717ccde8f1135cd469d1a5dd7c5f86
 
 COCOAPODS: 1.11.3

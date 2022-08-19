@@ -9,8 +9,7 @@ target 'ImageClassification' do
 
   # Pods for ImageClassification
 
-  pod 'TensorFlowLiteTaskVision', '~>0.0.1-nightly.20220714'
-  pod 'TensorFlowLiteTaskText', '~>0.0.1-nightly.20220714'
-
+  pod 'TensorFlowLiteTaskVision'
+  pod 'TensorFlowLiteTaskText'
 
 end
