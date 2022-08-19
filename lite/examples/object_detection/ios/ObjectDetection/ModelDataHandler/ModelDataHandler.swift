@@ -93,7 +93,7 @@ class ModelDataHandler: NSObject {
     // Specify the options for the `Interpreter`.
     self.threadCount = threadCount
     let options = ObjectDetectorOptions(modelPath: modelPath)
-    options.baseOptions.computeSettings.cpuSettings.numThreads = Int32(threadCount)
+    options.baseOptions.computeSettings.cpuSettings.numThreads = threadCount
     options.classificationOptions.maxResults = 3
     
     do {

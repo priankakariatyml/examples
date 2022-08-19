@@ -1,5 +1,5 @@
 PODS:
-  - TensorFlowLiteTaskVision (0.4.0)
+  - TensorFlowLiteTaskVision (0.4.2)
 
 DEPENDENCIES:
   - TensorFlowLiteTaskVision
@@ -9,7 +9,7 @@ SPEC REPOS:
     - TensorFlowLiteTaskVision
 
 SPEC CHECKSUMS:
-  TensorFlowLiteTaskVision: 1a509ece027763df2a5e216aedc3bfb0b8fca73f
+  TensorFlowLiteTaskVision: c5a0f4d6c220d27fe2f2f83dd04c69dff56d2768
 
 PODFILE CHECKSUM: 08a2c4b51c86ba4a7ef2a2a0c69fa7ca117b1bba
 

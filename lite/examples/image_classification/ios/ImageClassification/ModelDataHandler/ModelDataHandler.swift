@@ -106,6 +106,22 @@ class ModelDataHandler {
       return nil
     }
     
+    guard let bertModelPath = Bundle.main.path(
+      forResource: "bert_nl_classifier",
+      ofType: modelFileInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(modelFilename).")
+      return nil
+    }
+    
+    guard let qaModelPath = Bundle.main.path(
+      forResource: "mobilebert_with_metadata",
+      ofType: modelFileInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(modelFilename).")
+      return nil
+    }
+    
     
     let nLClassifier = TFLNLClassifier.nlClassifier(modelPath: textModelPath, options: TFLNLClassifierOptions())
   
@@ -113,11 +129,21 @@ class ModelDataHandler {
     let categories = nLClassifier.classify(text: "This is the best movie I’ve seen in recent years.")
     print(categories)
     
-//    let bertNLClass = TFLBertNLClassifier.bertNLClassifier(modelPath: textModelPath)
-//    let cats = bertNLClass.classify(text: "This is the best movie I’ve seen in recent years.")
+    let bertNLClass = TFLBertNLClassifier.bertNLClassifier(modelPath: bertModelPath)
+    let cats = bertNLClass.classify(text: "This is the best movie I’ve seen in recent years.")
+    print(cats)
     
-    let qa = TFLBertQuestionAnswerer.questionAnswerer(modelPath: textModelPath)
-    let ans: [TFLQAAnswer] = qa.answer(context: "", question: "")
+    let qa = TFLBertQuestionAnswerer.questionAnswerer(modelPath: qaModelPath)
+    let ans: [TFLQAAnswer] = qa.answer(context: """
+    The role of teacher is often formal and ongoing, carried out at a school or other place of
+    formal education. In many countries, a person who wishes to become a teacher must first obtain
+     specified professional qualifications or credentials from a university or college. These
+    professional qualifications may include the study of pedagogy, the science of teaching.
+    Teachers, like other professionals, may have to continue their education after they qualify,
+    a process known as continuing professional development. Teachers may use a lesson plan to
+    facilitate student learning, providing a course of study which is called the curriculum.
+    """, question: "What is a course of study called?")
+    print(ans[0].text)
 
     
   }

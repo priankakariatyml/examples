@@ -10,6 +10,8 @@
 		AA16E5A22180843800D9E153 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16E5A12180843700D9E153 /* InfoCell.swift */; };
 		AA5B0EEA217E5E300026FF23 /* InferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */; };
 		AA5B0EEC217E70000026FF23 /* CurvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EEB217E70000026FF23 /* CurvedView.swift */; };
+		AA7CD74B28AF5BCE00A89469 /* bert_nl_classifier.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA7CD74A28AF5BCE00A89469 /* bert_nl_classifier.tflite */; };
+		AA7CD74D28AF5C3300A89469 /* mobilebert_with_metadata.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA7CD74C28AF5C3300A89469 /* mobilebert_with_metadata.tflite */; };
 		AAAB096E218981FA0015A1F2 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */; };
 		AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */; };
 		AABFCBB2213FE0B100C0A67B /* ModelDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */; };
@@ -30,6 +32,8 @@
 		AA16E5A12180843700D9E153 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceViewController.swift; sourceTree = "<group>"; };
 		AA5B0EEB217E70000026FF23 /* CurvedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurvedView.swift; sourceTree = "<group>"; };
+		AA7CD74A28AF5BCE00A89469 /* bert_nl_classifier.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = bert_nl_classifier.tflite; sourceTree = "<group>"; };
+		AA7CD74C28AF5C3300A89469 /* mobilebert_with_metadata.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilebert_with_metadata.tflite; sourceTree = "<group>"; };
 		AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
 		AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_v2_1.0_224.tflite; sourceTree = "<group>"; };
 		AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDataHandler.swift; sourceTree = "<group>"; };
@@ -94,7 +98,9 @@
 		AA5FEB7A21355CCC00F9BD4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AA7CD74C28AF5C3300A89469 /* mobilebert_with_metadata.tflite */,
 				AAFC237D2866239500973EF2 /* test_model_nl_classifier_with_regex_tokenizer.tflite */,
+				AA7CD74A28AF5BCE00A89469 /* bert_nl_classifier.tflite */,
 				AAADDF4F282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite */,
 			);
 			path = Model;
@@ -240,6 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAE79E64213521DB00E7AC1F /* LaunchScreen.storyboard in Resources */,
+				AA7CD74D28AF5C3300A89469 /* mobilebert_with_metadata.tflite in Resources */,
+				AA7CD74B28AF5BCE00A89469 /* bert_nl_classifier.tflite in Resources */,
 				AAFC237E2866239500973EF2 /* test_model_nl_classifier_with_regex_tokenizer.tflite in Resources */,
 				AAE79E61213521DB00E7AC1F /* Assets.xcassets in Resources */,
 				AAADDF50282555EC002DCED8 /* mobilenet_v2_1.0_224.tflite in Resources */,
@@ -437,7 +445,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R828ZATN6C;
+				DEVELOPMENT_TEAM = D784CAQKMX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -466,7 +474,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R828ZATN6C;
+				DEVELOPMENT_TEAM = D784CAQKMX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
