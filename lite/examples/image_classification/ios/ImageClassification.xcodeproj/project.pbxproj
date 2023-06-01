@@ -10,10 +10,14 @@
 		AA16E5A22180843800D9E153 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16E5A12180843700D9E153 /* InfoCell.swift */; };
 		AA5B0EEA217E5E300026FF23 /* InferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */; };
 		AA5B0EEC217E70000026FF23 /* CurvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B0EEB217E70000026FF23 /* CurvedView.swift */; };
-		AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */; };
 		AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA5FEB7C21355CCC00F9BD4B /* labels.txt */; };
 		AAAB096E218981FA0015A1F2 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */; };
+		AABE40732A0084C10014DAA7 /* mobilenet_v2_1.0_224.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AABE40722A0084C10014DAA7 /* mobilenet_v2_1.0_224.tflite */; };
+		AABE40752A02E99F0014DAA7 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AABE40742A02E99F0014DAA7 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */; };
 		AABFCBB2213FE0B100C0A67B /* ModelDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */; };
+		AAC04A272A20C2D7004A7662 /* face_detection_short_range.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AAC04A262A20C2D7004A7662 /* face_detection_short_range.tflite */; };
+		AADC3D042A04292C00DA4C2D /* bert_text_classifier.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AADC3D032A04292C00DA4C2D /* bert_text_classifier.tflite */; };
+		AADC3D062A04331000DA4C2D /* mobilebert_embedding_with_metadata.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AADC3D052A04331000DA4C2D /* mobilebert_embedding_with_metadata.tflite */; };
 		AAE79E5A213521DA00E7AC1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79E59213521DA00E7AC1F /* AppDelegate.swift */; };
 		AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE79E5D213521DA00E7AC1F /* Main.storyboard */; };
 		AAE79E61213521DB00E7AC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE79E60213521DB00E7AC1F /* Assets.xcassets */; };
@@ -30,10 +34,14 @@
 		AA16E5A12180843700D9E153 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		AA5B0EE9217E5E300026FF23 /* InferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceViewController.swift; sourceTree = "<group>"; };
 		AA5B0EEB217E70000026FF23 /* CurvedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurvedView.swift; sourceTree = "<group>"; };
-		AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_quant_v1_224.tflite; sourceTree = "<group>"; };
 		AA5FEB7C21355CCC00F9BD4B /* labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
 		AAAB096D218981FA0015A1F2 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
+		AABE40722A0084C10014DAA7 /* mobilenet_v2_1.0_224.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilenet_v2_1.0_224.tflite; sourceTree = "<group>"; };
+		AABE40742A02E99F0014DAA7 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite; sourceTree = "<group>"; };
 		AABFCBB1213FE0B100C0A67B /* ModelDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDataHandler.swift; sourceTree = "<group>"; };
+		AAC04A262A20C2D7004A7662 /* face_detection_short_range.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = face_detection_short_range.tflite; sourceTree = "<group>"; };
+		AADC3D032A04292C00DA4C2D /* bert_text_classifier.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = bert_text_classifier.tflite; sourceTree = "<group>"; };
+		AADC3D052A04331000DA4C2D /* mobilebert_embedding_with_metadata.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilebert_embedding_with_metadata.tflite; sourceTree = "<group>"; };
 		AAE79E56213521DA00E7AC1F /* ImageClassification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageClassification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE79E59213521DA00E7AC1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE79E5E213521DA00E7AC1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,7 +80,6 @@
 				E7F867EEDB032059F98AA497 /* Pods-ImageClassification.debug.xcconfig */,
 				14CAE291077E814D03E79CB3 /* Pods-ImageClassification.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -95,7 +102,11 @@
 		AA5FEB7A21355CCC00F9BD4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AA5FEB7B21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite */,
+				AAC04A262A20C2D7004A7662 /* face_detection_short_range.tflite */,
+				AADC3D032A04292C00DA4C2D /* bert_text_classifier.tflite */,
+				AADC3D052A04331000DA4C2D /* mobilebert_embedding_with_metadata.tflite */,
+				AABE40722A0084C10014DAA7 /* mobilenet_v2_1.0_224.tflite */,
+				AABE40742A02E99F0014DAA7 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite */,
 				AA5FEB7C21355CCC00F9BD4B /* labels.txt */,
 			);
 			path = Model;
@@ -243,9 +254,13 @@
 			files = (
 				AAE79E64213521DB00E7AC1F /* LaunchScreen.storyboard in Resources */,
 				AAE79E61213521DB00E7AC1F /* Assets.xcassets in Resources */,
+				AABE40732A0084C10014DAA7 /* mobilenet_v2_1.0_224.tflite in Resources */,
 				AA5FEB7E21355CCC00F9BD4B /* labels.txt in Resources */,
 				AAE79E5F213521DA00E7AC1F /* Main.storyboard in Resources */,
-				AA5FEB7D21355CCC00F9BD4B /* mobilenet_quant_v1_224.tflite in Resources */,
+				AAC04A272A20C2D7004A7662 /* face_detection_short_range.tflite in Resources */,
+				AADC3D062A04331000DA4C2D /* mobilebert_embedding_with_metadata.tflite in Resources */,
+				AADC3D042A04292C00DA4C2D /* bert_text_classifier.tflite in Resources */,
+				AABE40752A02E99F0014DAA7 /* coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +470,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R828ZATN6C;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -466,7 +481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -482,7 +497,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R828ZATN6C;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -493,7 +508,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tensorflow.ImageClassification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prianka.ImageClassification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;

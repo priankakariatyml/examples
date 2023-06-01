@@ -1,20 +1,25 @@
 PODS:
-  - TensorFlowLiteC (2.0.0)
-  - TensorFlowLiteSwift (2.0.0):
-    - TensorFlowLiteC (= 2.0.0)
+  - MediaPipeTasksCommon (5.6.5)
+  - MediaPipeTasksText (5.6.5):
+    - MediaPipeTasksCommon (= 5.6.5)
+  - MediaPipeTasksVision (5.6.5):
+    - MediaPipeTasksCommon (= 5.6.5)
 
 DEPENDENCIES:
-  - TensorFlowLiteSwift
+  - MediaPipeTasksText (~> 5.6.5)
+  - MediaPipeTasksVision (~> 5.6.5)
 
 SPEC REPOS:
-  trunk:
-    - TensorFlowLiteC
-    - TensorFlowLiteSwift
+  https://github.com/priankakariatyml/mpp-task-pod-test.git:
+    - MediaPipeTasksCommon
+    - MediaPipeTasksText
+    - MediaPipeTasksVision
 
 SPEC CHECKSUMS:
-  TensorFlowLiteC: d22a94f77938edb2dfcb9674937f9548a3fcdb23
-  TensorFlowLiteSwift: dcd91bd74091f8e3e1b9b28a7d789f635dc26bea
+  MediaPipeTasksCommon: 2cd459c8c933c3ff258c62237bae51dbebac919c
+  MediaPipeTasksText: e27ce0d000adfbc3492946b7523baa173075b55a
+  MediaPipeTasksVision: b67b8d29d6ae29c738bb7effee839b9fa20669af
 
-PODFILE CHECKSUM: 89f7867e5c2130babaa8402a0826ea3555a14089
+PODFILE CHECKSUM: e47628b79e800accf67cec9cbbc55d58f94dbf74
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.12.1

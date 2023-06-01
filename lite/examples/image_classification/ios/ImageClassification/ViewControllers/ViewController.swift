@@ -130,9 +130,9 @@ class ViewController: UIViewController {
 
     previewView.image = image
 
-    DispatchQueue.global().async {
-      self.didOutput(pixelBuffer: buffer)
-    }
+//    DispatchQueue.global().async {
+//      self.didOutput(sampleBuffer: buffer)
+//    }
   }
 
   deinit {
@@ -157,21 +157,21 @@ extension ViewController: InferenceViewControllerDelegate {
 // MARK: CameraFeedManagerDelegate Methods
 extension ViewController: CameraFeedManagerDelegate {
 
-  func didOutput(pixelBuffer: CVPixelBuffer) {
+  func didOutput(sampleBuffer: CMSampleBuffer) {
     let currentTimeMs = Date().timeIntervalSince1970 * 1000
     guard (currentTimeMs - previousInferenceTimeMs) >= delayBetweenInferencesMs else { return }
     previousInferenceTimeMs = currentTimeMs
 
     // Pass the pixel buffer to TensorFlow Lite to perform inference.
-    result = modelDataHandler?.runModel(onFrame: pixelBuffer)
+    result = modelDataHandler?.runModel(onFrame: sampleBuffer)
 
     // Display results by handing off to the InferenceViewController.
-    DispatchQueue.main.async {
-      let resolution = CGSize(width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
-      self.inferenceViewController?.inferenceResult = self.result
-      self.inferenceViewController?.resolution = resolution
-      self.inferenceViewController?.tableView.reloadData()
-    }
+//    DispatchQueue.main.async {
+//      let resolution = CGSize(width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
+//      self.inferenceViewController?.inferenceResult = self.result
+//      self.inferenceViewController?.resolution = resolution
+//      self.inferenceViewController?.tableView.reloadData()
+//    }
   }
 
   // MARK: Session Handling Alerts

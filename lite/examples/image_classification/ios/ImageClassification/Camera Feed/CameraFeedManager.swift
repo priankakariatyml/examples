@@ -16,12 +16,12 @@ import UIKit
 import AVFoundation
 
 // MARK: CameraFeedManagerDelegate Declaration
-protocol CameraFeedManagerDelegate: class {
+protocol CameraFeedManagerDelegate: AnyObject {
 
   /**
   This method delivers the pixel buffer of the current frame seen by the device's camera.
  */
-  func didOutput(pixelBuffer: CVPixelBuffer)
+  func didOutput(sampleBuffer: CMSampleBuffer)
 
   /**
    This method initimates that the camera permissions have been denied.
@@ -248,6 +248,7 @@ class CameraFeedManager: NSObject {
   private func addVideoDataOutput() -> Bool {
 
     let sampleBufferQueue = DispatchQueue(label: "sampleBufferQueue")
+//    videoDataOutput.sampleBufferDelegate = self;
     videoDataOutput.setSampleBufferDelegate(self, queue: sampleBufferQueue)
     videoDataOutput.alwaysDiscardsLateVideoFrames = true
     videoDataOutput.videoSettings = [ String(kCVPixelBufferPixelFormatTypeKey) : kCMPixelFormat_32BGRA]
@@ -331,16 +332,16 @@ extension CameraFeedManager: AVCaptureVideoDataOutputSampleBufferDelegate {
   /** This method delegates the CVPixelBuffer of the frame seen by the camera currently.
  */
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-
-    // Converts the CMSampleBuffer to a CVPixelBuffer.
-    let pixelBuffer: CVPixelBuffer? = CMSampleBufferGetImageBuffer(sampleBuffer)
-
-    guard let imagePixelBuffer = pixelBuffer else {
-      return
-    }
+//
+//    // Converts the CMSampleBuffer to a CVPixelBuffer.
+//    let pixelBuffer: CVPixelBuffer? = CMSampleBufferGetImageBuffer(sampleBuffer)
+//
+//    guard let imagePixelBuffer = pixelBuffer else {
+//      return
+//    }
 
     // Delegates the pixel buffer to the ViewController.
-    delegate?.didOutput(pixelBuffer: imagePixelBuffer)
+    delegate?.didOutput(sampleBuffer: sampleBuffer)
   }
 
 }

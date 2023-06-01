@@ -13,9 +13,10 @@
 // limitations under the License.
 
 import CoreImage
-import TensorFlowLite
 import UIKit
 import Accelerate
+import MediaPipeTasksVision
+import MediaPipeTasksText
 
 /// A result from invoking the `Interpreter`.
 struct Result {
@@ -34,22 +35,49 @@ typealias FileInfo = (name: String, extension: String)
 
 /// Information about the MobileNet model.
 enum MobileNet {
-  static let modelInfo: FileInfo = (name: "mobilenet_quant_v1_224", extension: "tflite")
+  static let modelInfo: FileInfo = (name: "mobilenet_v2_1.0_224", extension: "tflite")
+  static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
+}
+
+enum CocoSsd {
+  static let modelInfo: FileInfo = (name: "coco_ssd_mobilenet_v1_1.0_quant_2018_06_29", extension: "tflite")
+  static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
+}
+
+enum Bert {
+  static let modelInfo: FileInfo = (name: "bert_text_classifier", extension: "tflite")
+  static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
+}
+
+enum Emb {
+  static let modelInfo: FileInfo = (name: "mobilebert_embedding_with_metadata", extension: "tflite")
+  static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
+}
+
+enum FaceDetectionShortRange {
+  static let modelInfo: FileInfo = (name: "face_detection_short_range", extension: "tflite")
   static let labelsInfo: FileInfo = (name: "labels", extension: "txt")
 }
 
 /// This class handles all data preprocessing and makes calls to run inference on a given frame
 /// by invoking the `Interpreter`. It then formats the inferences obtained and returns the top N
 /// results for a successful inference.
-class ModelDataHandler {
+class ModelDataHandler: NSObject, ObjectDetectorLiveStreamDelegate, ImageClassifierLiveStreamDelegate, FaceDetectorLiveStreamDelegate {
+
 
   // MARK: - Internal Properties
 
   /// The current thread count used by the TensorFlow Lite Interpreter.
-  let threadCount: Int
+  var threadCount: Int
 
   let resultCount = 3
   let threadCountLimit = 10
+  var imageClassifier: ImageClassifier!
+  var objectDetector: ObjectDetector!
+  var textClassifier: TextClassifier!
+  var textEmbedder: TextEmbedder!
+  
+  var faceDetector: FaceDetector!
 
   // MARK: - Model Parameters
 
@@ -64,17 +92,21 @@ class ModelDataHandler {
   private var labels: [String] = []
 
   /// TensorFlow Lite `Interpreter` object for performing inference on a given model.
-  private var interpreter: Interpreter
+//  private var interpreter: Interpreter
 
   /// Information about the alpha component in RGBA data.
   private let alphaComponent = (baseOffset: 4, moduloRemainder: 3)
 
   // MARK: - Initialization
+  
 
   /// A failable initializer for `ModelDataHandler`. A new instance is created if the model and
   /// labels files are successfully loaded from the app's main bundle. Default `threadCount` is 1.
   init?(modelFileInfo: FileInfo, labelsFileInfo: FileInfo, threadCount: Int = 1) {
     let modelFilename = modelFileInfo.name
+    self.threadCount = 1
+    super.init()
+  
 
     // Construct the path to the model file.
     guard let modelPath = Bundle.main.path(
@@ -84,98 +116,255 @@ class ModelDataHandler {
       print("Failed to load the model file with name: \(modelFilename).")
       return nil
     }
-
-    // Specify the options for the `Interpreter`.
-    self.threadCount = threadCount
-    var options = InterpreterOptions()
-    options.threadCount = threadCount
-    do {
-      // Create the `Interpreter`.
-      interpreter = try Interpreter(modelPath: modelPath, options: options)
-      // Allocate memory for the model's input `Tensor`s.
-      try interpreter.allocateTensors()
-    } catch let error {
-      print("Failed to create the interpreter with error: \(error.localizedDescription)")
+    
+    guard let objModelPath = Bundle.main.path(
+      forResource: CocoSsd.modelInfo.name,
+      ofType: CocoSsd.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
       return nil
     }
-    // Load the classes listed in the labels file.
-    loadLabels(fileInfo: labelsFileInfo)
+    
+    guard let embModelPath = Bundle.main.path(
+      forResource: Emb.modelInfo.name,
+      ofType: Emb.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
+      return nil
+    }
+    
+    guard let faceDetPath = Bundle.main.path(
+      forResource: FaceDetectionShortRange.modelInfo.name,
+      ofType: FaceDetectionShortRange.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(FaceDetectionShortRange.modelInfo.name).")
+      return nil
+    }
+    
+    do {
+            let objectDetectorOptions = ObjectDetectorOptions()
+            objectDetectorOptions.baseOptions.modelAssetPath = objModelPath
+            objectDetectorOptions.runningMode = RunningMode.liveStream
+            objectDetectorOptions.objectDetectorLiveStreamDelegate = self
+//
+            objectDetector = try ObjectDetector(options: objectDetectorOptions)
+//
+      let imageClassifierOptions = ImageClassifierOptions()
+      imageClassifierOptions.baseOptions.modelAssetPath = modelPath
+      imageClassifierOptions.runningMode = RunningMode.liveStream
+      imageClassifierOptions.imageClassifierLiveStreamDelegate = self
+      imageClassifier = try ImageClassifier(options: imageClassifierOptions)
+      
+      let faceDetOptions = FaceDetectorOptions()
+      faceDetOptions.baseOptions.modelAssetPath = faceDetPath
+      faceDetOptions.runningMode = RunningMode.liveStream
+      faceDetOptions.faceDetectorLiveStreamDelegate = self
+      
+      faceDetector = try FaceDetector(options: faceDetOptions)
+//
+//
+      //    var imageClassifierResult: ImageClassifierResult
+//      guard let modelPath = Bundle.main.path(
+//        forResource: "bert_text_classifier",
+//        ofType: "tflite"
+//      ) else {
+//        print("Failed to load the model")
+//        return
+//      }
+      
+//      do {
+//        textClassifier = try TextClassifier(modelPath: modelPath)
+//        textEmbedder = try TextEmbedder(modelPath: embModelPath)
+//
+//        imageClassifier = try ImageClassifier(options: imageClassifierOptions)
+      
+      
+  
+
+//        let textClassifierResult = try textClassifier?.classify(text: "unflinchingly bleak")
+//        print(textClassifierResult?.classificationResult.classifications[0].categories[0].categoryName!)
+//        //      imageClassifier = try ImageClassifier.classifier(options: options)
+//        //        imageSearcher = try ImageSearcher.searcher(options: searcherOptions)
+//      }
+//      catch {
+//        print("Failed to create the classifier with error: \(error.localizedDescription)")
+//        return
+//      }
+
+//      DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//        self.imageClassifier = nil;
+//        print("\(self.imageClassifier)");
+//      }
+//
+      //      imageClassifier = try ImageClassifier.classifier(options: options)
+      //        imageSearcher = try ImageSearcher.searcher(options: searcherOptions)
+    }
+    catch {
+      print("Failed to create the classifier with error: \(error.localizedDescription)")
+      return
+    }
+
   }
 
   // MARK: - Internal Methods
 
   /// Performs image preprocessing, invokes the `Interpreter`, and processes the inference results.
-  func runModel(onFrame pixelBuffer: CVPixelBuffer) -> Result? {
+  func runModel(onFrame sampleBuffer: CMSampleBuffer) -> Result? {
     
-    let sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer)
-    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB ||
-             sourcePixelFormat == kCVPixelFormatType_32BGRA ||
-               sourcePixelFormat == kCVPixelFormatType_32RGBA)
-
-
-    let imageChannels = 4
-    assert(imageChannels >= inputChannels)
-
-    // Crops the image to the biggest square in the center and scales it down to model dimensions.
-    let scaledSize = CGSize(width: inputWidth, height: inputHeight)
-    guard let thumbnailPixelBuffer = pixelBuffer.centerThumbnail(ofSize: scaledSize) else {
+    guard let modelPath = Bundle.main.path(
+      forResource: MobileNet.modelInfo.name,
+      ofType: MobileNet.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(MobileNet.modelInfo.name).")
       return nil
     }
 
-    let interval: TimeInterval
-    let outputTensor: Tensor
+
+    guard let objModelPath = Bundle.main.path(
+      forResource: CocoSsd.modelInfo.name,
+      ofType: CocoSsd.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
+      return nil
+    }
+
+    guard let bertModelPath = Bundle.main.path(
+      forResource: Bert.modelInfo.name,
+      ofType: Bert.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
+      return nil
+    }
+
+    guard let embModelPath = Bundle.main.path(
+      forResource: Emb.modelInfo.name,
+      ofType: Emb.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
+      return nil
+    }
+    
+    guard let faceDetPath = Bundle.main.path(
+      forResource: FaceDetectionShortRange.modelInfo.name,
+      ofType: FaceDetectionShortRange.modelInfo.extension
+    ) else {
+      print("Failed to load the model file with name: \(FaceDetectionShortRange.modelInfo.name).")
+      return nil
+    }
+
     do {
-      let inputTensor = try interpreter.input(at: 0)
 
-      // Remove the alpha component from the image buffer to get the RGB data.
-      guard let rgbData = rgbDataFromBuffer(
-        thumbnailPixelBuffer,
-        byteCount: batchSize * inputWidth * inputHeight * inputChannels,
-        isModelQuantized: inputTensor.dataType == .uInt8
-      ) else {
-        print("Failed to convert the image buffer to RGB data.")
-        return nil
-      }
+      let dur = CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer));
+      let durInMiliSec = Int(ceil(1000*dur));
 
-      // Copy the RGB data to the input `Tensor`.
-      try interpreter.copy(rgbData, toInputAt: 0)
+      let image = try MPImage(sampleBuffer: sampleBuffer)
 
-      // Run inference by invoking the `Interpreter`.
-      let startDate = Date()
-      try interpreter.invoke()
-      interval = Date().timeIntervalSince(startDate) * 1000
+//
+//      let faceDetOptions = FaceDetectorOptions()
+//      faceDetOptions.baseOptions.modelAssetPath = faceDetPath
+//      faceDetOptions.runningMode = RunningMode.liveStream
+//      faceDetOptions.faceDetectorLiveStreamDelegate = self
+//
+//      let faceDetector = try FaceDetector(options: faceDetOptions)
+//
+      try faceDetector.detectAsync(image: image, timestampInMilliseconds: durInMiliSec)
+//
+//      print("\(faceDetector)");
+//
+//      let imageClassifierOptions = ImageClassifierOptions()
+//      imageClassifierOptions.baseOptions.modelAssetPath = modelPath
+//      imageClassifierOptions.runningMode = RunningMode.liveStream
+//      imageClassifierOptions.imageClassifierLiveStreamDelegate = self
+//
+//      let imageClassifier = try ImageClassifier(options: imageClassifierOptions)
 
-      // Get the output `Tensor` to process the inference results.
-      outputTensor = try interpreter.output(at: 0)
-    } catch let error {
-      print("Failed to invoke the interpreter with error: \(error.localizedDescription)")
-      return nil
+//      print("\(imageClassifier)");
+
+//      let image = try MPImage(sampleBuffer: sampleBuffer)
+//
+////
+//      let dur = CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(sampleBuffer));
+//      let durInMiliSec = Int(ceil(1000*dur));
+//
+      try imageClassifier.classifyAsync(image: image, timestampInMilliseconds: durInMiliSec)
+//
+//
+//      try imageClassifier.classifyAsync(image: image, timestampInMilliseconds: durInMiliSec)
+//
+//      let objectDetectorOptions = ObjectDetectorOptions()
+//      objectDetectorOptions.baseOptions.modelAssetPath = objModelPath
+//      objectDetectorOptions.runningMode = RunningMode.liveStream
+//      objectDetectorOptions.objectDetectorLiveStreamDelegate = self
+//
+//      let objectDetector = try ObjectDetector(options: objectDetectorOptions)
+
+//      print("\(objectDetector)");
+      try objectDetector.detectAsync(image: image, timestampInMilliseconds: durInMiliSec)
+//
+////      let objectDetectionResult = try objectDetector?.detect(image: image)
+////      print(objectDetectionResult?.detections[0].categories[0].categoryName)
+////      print(objectDetectionResult?.detections[1].categories[0].categoryName)
+////      print(objectDetectionResult?.detections[2].categories[0].categoryName)
+////
+//      let textClassifierOptions = TextClassifierOptions()
+//      textClassifierOptions.baseOptions.modelAssetPath = bertModelPath
+//
+//      let textClassifier = try TextClassifier(options: textClassifierOptions)
+//      let textClassifierResult = try textClassifier.classify(text: "unflinchingly bleak")
+//      print(textClassifierResult.classificationResult.classifications[0].categories[0].categoryName!)
+//
+//      guard let embModelPath = Bundle.main.path(
+//        forResource: Emb.modelInfo.name,
+//        ofType: Emb.modelInfo.extension
+//      ) else {
+//        print("Failed to load the model file with name: \(CocoSsd.modelInfo.name).")
+//        return nil
+//      }
+////
+//      let textEmbedderOptions = TextEmbedderOptions()
+//      textEmbedderOptions.baseOptions.modelAssetPath = embModelPath
+//      let textEmbedder = try TextEmbedder(options: textEmbedderOptions)
+//      let textEmbedderResult = try textEmbedder.embed(text: "unflinchingly bleak")
+//      print(textEmbedderResult.embeddingResult.embeddings[0].quantizedEmbedding?[0])
+//      print(textEmbedderResult.embeddingResult.embeddings[0].floatEmbedding?[0])
+
     }
-
-    let results: [Float]
-    switch outputTensor.dataType {
-    case .uInt8:
-      guard let quantization = outputTensor.quantizationParameters else {
-        print("No results returned because the quantization values for the output tensor are nil.")
-        return nil
-      }
-      let quantizedResults = [UInt8](outputTensor.data)
-      results = quantizedResults.map {
-        quantization.scale * Float(Int($0) - quantization.zeroPoint)
-      }
-    case .float32:
-      results = [Float32](unsafeData: outputTensor.data) ?? []
-    default:
-      print("Output tensor data type \(outputTensor.dataType) is unsupported for this example app.")
-      return nil
+    catch {
+      print(error.localizedDescription)
     }
+//
 
-    // Process the results.
-    let topNInferences = getTopN(results: results)
-
-    // Return the inference time and inference results.
-    return Result(inferenceTime: interval, inferences: topNInferences)
+//     Return the inference time and inference results.
+    return nil
   }
+  
+  
+  func imageClassifier(_ imageClassifier: ImageClassifier, didFinishClassification imageClassifierResult: ImageClassifierResult?, timestampInMilliseconds: Int, error: Error?) {
+    if(self.imageClassifier == imageClassifier) {
+      print(imageClassifierResult!.classificationResult.classifications[0].categories[0].categoryName)
+      print(imageClassifierResult!.classificationResult.classifications[0].categories[1].categoryName)
+      print(imageClassifierResult!.classificationResult.classifications[0].categories[2].categoryName)
+    }
+  }
+//
+    func objectDetector(_ objectDetector: ObjectDetector, didFinishDetection objectDetectionResult: ObjectDetectorResult?, timestampInMilliseconds: Int, error: Error?) {
+      if(self.objectDetector == objectDetector) {
+        print(objectDetectionResult!.detections[0].categories[0].categoryName)
+        print(objectDetectionResult!.detections[1].categories[0].categoryName)
+        print(objectDetectionResult!.detections[2].categories[0].categoryName)
+      }
+    }
+//
+    func faceDetector(_ faceDetector: FaceDetector, didFinishDetection faceDetectorResult:FaceDetectorResult?, timestampInMilliseconds: Int, error: Error?) {
+
+      if(self.faceDetector == faceDetector) {
+        print(" Face Det called")
+        
+      }
+    }
+    
+    
+//    sleep(10)
 
   // MARK: - Private Methods
 
